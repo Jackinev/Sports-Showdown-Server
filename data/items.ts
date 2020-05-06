@@ -194,7 +194,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Raichu-Alola"],
 		num: 803,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by an Alolan Raichu with Thunderbolt, it can use Stoked Sparksurfer.",
 	},
 	altarianite: {
@@ -649,7 +649,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Bug",
 		num: 787,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Bug move, this item allows it to use a Bug Z-Move.",
 	},
 	burndrive: {
@@ -1156,7 +1156,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Dark",
 		num: 791,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Dark move, this item allows it to use a Dark Z-Move.",
 	},
 	dawnstone: {
@@ -1179,7 +1179,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Decidueye"],
 		num: 798,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Decidueye with Spirit Shackle, it can use Sinister Arrow Raid.",
 	},
 	deepseascale: {
@@ -1374,7 +1374,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Dragon",
 		num: 790,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Dragon move, this item allows it to use a Dragon Z-Move.",
 	},
 	dreadplate: {
@@ -1481,7 +1481,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Eevee"],
 		num: 805,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by an Eevee with Last Resort, it can use Extreme Evoboost.",
 	},
 	ejectbutton: {
@@ -1611,7 +1611,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Electric",
 		num: 779,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has an Electric move, this item allows it to use an Electric Z-Move.",
 	},
 	energypowder: {
@@ -1697,7 +1697,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Fairy",
 		num: 793,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Fairy move, this item allows it to use a Fairy Z-Move.",
 	},
 	fairygem: {
@@ -1780,7 +1780,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Fighting",
 		num: 782,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Fighting move, this item allows it to use a Fighting Z-Move.",
 	},
 	figyberry: {
@@ -1862,7 +1862,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Fire",
 		num: 777,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Fire move, this item allows it to use a Fire Z-Move.",
 	},
 	fistplate: {
@@ -1989,7 +1989,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Flying",
 		num: 785,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Flying move, this item allows it to use a Flying Z-Move.",
 	},
 	focusband: {
@@ -2207,7 +2207,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Ghost",
 		num: 789,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Ghost move, this item allows it to use a Ghost Z-Move.",
 	},
 	glalitite: {
@@ -2277,7 +2277,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Grass",
 		num: 780,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Grass move, this item allows it to use a Grass Z-Move.",
 	},
 	grassyseed: {
@@ -2402,7 +2402,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Ground",
 		num: 784,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Ground move, this item allows it to use a Ground Z-Move.",
 	},
 	gyaradosite: {
@@ -2652,7 +2652,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Ice",
 		num: 781,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has an Ice move, this item allows it to use an Ice Z-Move.",
 	},
 	icyrock: {
@@ -2674,7 +2674,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Incineroar"],
 		num: 799,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by an Incineroar with Darkest Lariat, it can use Malicious Moonsault.",
 	},
 	insectplate: {
@@ -2905,7 +2905,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Kommo-o", "Kommo-o-Totem"],
 		num: 926,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Kommo-o with Clanging Scales, it can use Clangorous Soulblaze.",
 	},
 	laggingtail: {
@@ -3256,7 +3256,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Lunala", "Necrozma-Dawn-Wings"],
 		num: 922,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "Lunala or Dawn Wings Necrozma with Moongeist Beam can use a special Z-Move.",
 	},
 	lureball: {
@@ -3302,7 +3302,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Lycanroc", "Lycanroc-Midnight", "Lycanroc-Dusk"],
 		num: 925,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Lycanroc forme with Stone Edge, it can use Splintered Stormshards.",
 	},
 	machobrace: {
@@ -3441,7 +3441,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Marshadow"],
 		num: 802,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by Marshadow with Spectral Thief, it can use Soul-Stealing 7-Star Strike.",
 	},
 	masterball: {
@@ -3638,7 +3638,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Mew"],
 		num: 806,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Mew with Psychic, it can use Genesis Supernova.",
 	},
 	mewtwonitex: {
@@ -3710,7 +3710,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Play Rough",
 		itemUser: ["Mimikyu", "Mimikyu-Busted", "Mimikyu-Totem", "Mimikyu-Busted-Totem"],
 		num: 924,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		gen: 7,
 		desc: "If held by a Mimikyu with Play Rough, it can use Let's Snuggle Forever.",
 	},
@@ -3910,7 +3910,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		zMoveType: "Normal",
 		num: 776,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Normal move, this item allows it to use a Normal Z-Move.",
 	},
 	occaberry: {
@@ -4156,7 +4156,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Pikachu"],
 		num: 794,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Pikachu with Volt Tackle, it can use Catastropika.",
 	},
 	pikashuniumz: {
@@ -4167,7 +4167,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		zMoveFrom: "Thunderbolt",
 		itemUser: ["Pikachu-Original", "Pikachu-Hoenn", "Pikachu-Sinnoh", "Pikachu-Unova", "Pikachu-Kalos", "Pikachu-Alola", "Pikachu-Partner"],
 		num: 836,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		gen: 7,
 		desc: "If held by cap Pikachu with Thunderbolt, it can use 10,000,000 Volt Thunderbolt.",
 	},
@@ -4289,7 +4289,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Poison",
 		num: 783,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Poison move, this item allows it to use a Poison Z-Move.",
 	},
 	pokeball: {
@@ -4432,7 +4432,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Primarina"],
 		num: 800,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Primarina with Sparkling Aria, it can use Oceanic Operetta.",
 	},
 	prismscale: {
@@ -4572,7 +4572,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Psychic",
 		num: 786,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Psychic move, this item allows it to use a Psychic Z-Move.",
 	},
 	qualotberry: {
@@ -4894,7 +4894,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Rock",
 		num: 788,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Rock move, this item allows it to use a Rock Z-Move.",
 	},
 	rockyhelmet: {
@@ -5427,7 +5427,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Snorlax"],
 		num: 804,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Snorlax with Giga Impact, it can use Pulverizing Pancake.",
 	},
 	snowball: {
@@ -5473,7 +5473,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Solgaleo", "Necrozma-Dusk-Mane"],
 		num: 921,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "Solgaleo or Dusk Mane Necrozma with Sunsteel Strike can use a special Z-Move.",
 	},
 	souldew: {
@@ -5677,7 +5677,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Steel",
 		num: 792,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Steel move, this item allows it to use a Steel Z-Move.",
 	},
 	stick: {
@@ -5835,7 +5835,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Tapu Koko", "Tapu Lele", "Tapu Bulu", "Tapu Fini"],
 		num: 801,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If held by a Tapu with Nature's Madness, it can use Guardian of Alola.",
 	},
 	tartapple: {
@@ -6998,7 +6998,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		itemUser: ["Necrozma-Ultra"],
 		num: 923,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "Dusk Mane/Dawn Wings Necrozma: Ultra Burst, then Z-Move w/ Photon Geyser.",
 	},
 	upgrade: {
@@ -7115,7 +7115,7 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 		forcedForme: "Arceus-Water",
 		num: 778,
 		gen: 7,
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		desc: "If holder has a Water move, this item allows it to use a Water Z-Move.",
 	},
 	watmelberry: {

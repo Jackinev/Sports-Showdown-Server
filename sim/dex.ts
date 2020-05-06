@@ -1018,7 +1018,7 @@ export class ModdedDex {
 					// custom tags
 					'mega',
 					// illegal/nonstandard reasons
-					'past', 'future', 'unobtainable', 'lgpe', 'custom',
+					'past', 'pastmove', 'future', 'unobtainable', 'lgpe', 'custom',
 					// all
 					'allpokemon', 'allitems', 'allmoves', 'allabilities',
 				];

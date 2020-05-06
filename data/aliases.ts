@@ -14,7 +14,7 @@ export const BattleAliases: {[alias: string]: string} = {
 	dubers: "[Gen 8] Doubles Ubers",
 	duu: "[Gen 8] Doubles UU",
 	"2v2": "[Gen 8] 2v2 Doubles",
-	natdex: "[Gen 8] National Dex",
+	natdex: "[Gen 8] National Dex OU",
 	natdexag: "[Gen 8] National Dex AG",
 	bh: "[Gen 8] Balanced Hackmons",
 	mnm: "[Gen 8] Mix and Mega",

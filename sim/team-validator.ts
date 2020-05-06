@@ -1305,7 +1305,7 @@ export class TeamValidator {
 		if (tierSpecies.isNonstandard && tierSpecies.isNonstandard !== 'Unobtainable') {
 			banReason = ruleTable.check('nonexistent', setHas);
 			if (banReason) {
-				if (['Past', 'Future'].includes(tierSpecies.isNonstandard)) {
+				if (['Past', 'PastMove', 'Future'].includes(tierSpecies.isNonstandard)) {
 					return `${tierSpecies.name} does not exist in Gen ${dex.gen}.`;
 				}
 				return `${tierSpecies.name} does not exist in this game.`;
@@ -1348,7 +1348,7 @@ export class TeamValidator {
 		if (item.isNonstandard && item.isNonstandard !== 'Unobtainable') {
 			banReason = ruleTable.check('nonexistent', setHas);
 			if (banReason) {
-				if (['Past', 'Future'].includes(item.isNonstandard)) {
+				if (['Past', 'PastMove', 'Future'].includes(item.isNonstandard)) {
 					return `${set.name}'s item ${item.name} does not exist in Gen ${dex.gen}.`;
 				}
 				return `${set.name}'s item ${item.name} does not exist in this game.`;
@@ -1395,7 +1395,7 @@ export class TeamValidator {
 		if (move.isNonstandard && move.isNonstandard !== 'Unobtainable') {
 			banReason = ruleTable.check('nonexistent', setHas);
 			if (banReason) {
-				if (['Past', 'Future'].includes(move.isNonstandard)) {
+				if (['Past', 'PastMove', 'Future'].includes(move.isNonstandard)) {
 					return `${set.name}'s move ${move.name} does not exist in Gen ${dex.gen}.`;
 				}
 				return `${set.name}'s move ${move.name} does not exist in this game.`;
@@ -1433,7 +1433,7 @@ export class TeamValidator {
 
 			banReason = ruleTable.check('nonexistent', setHas);
 			if (banReason) {
-				if (['Past', 'Future'].includes(ability.isNonstandard)) {
+				if (['Past', 'PastMove', 'Future'].includes(ability.isNonstandard)) {
 					return `${set.name}'s ability ${ability.name} does not exist in Gen ${dex.gen}.`;
 				}
 				return `${set.name}'s ability ${ability.name} does not exist in this game.`;
@@ -1600,7 +1600,7 @@ export class TeamValidator {
 		let minSourceGen = this.minSourceGen;
 		if (this.dex.gen >= 3 && minSourceGen < 3) minSourceGen = 3;
 		if (species) minSourceGen = Math.max(minSourceGen, species.gen);
-		const maxSourceGen = this.ruleTable.has('allowtradeback') ? 2 : this.dex.gen;
+		const maxSourceGen = this.ruleTable.has('allowtradeback') ? this.dex.gen + 1 : this.dex.gen;
 		return new PokemonSources(maxSourceGen, minSourceGen);
 	}
 

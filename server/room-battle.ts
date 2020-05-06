@@ -190,11 +190,14 @@ export class RoomBattleTimer {
 		this.lastDisabledTime = 0;
 		this.lastDisabledByUser = null;
 
-		const hasLongTurns = Dex.getFormat(battle.format, true).gameType !== 'singles';
-		const isChallenge = (!battle.rated && !battle.room.tour);
 		const timerEntry = Dex.getRuleTable(Dex.getFormat(battle.format, true)).timer;
 		const timerSettings = timerEntry?.[0];
-
+		this.setSettings(timerSettings);
+	}
+	setSettings(timerSettings) {
+		const hasLongTurns = Dex.getFormat(this.battle.format, true).gameType !== 'singles';
+		const isChallenge = (!this.battle.rated && !this.battle.room.tour);
+		
 		// so that Object.assign doesn't overwrite anything with `undefined`
 		for (const k in timerSettings) {
 			// @ts-ignore
@@ -567,7 +570,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 			this.addPlayer(options.p4, options.p4team || '', options.p4rating);
 		}
 		this.timer = new RoomBattleTimer(this);
-		if (Config.forcetimer || this.format.includes('blitz')) this.timer.start();
+		if (Config.forcetimer || this.format.includes('blitz') || format.forcedTimer) this.timer.start();
 		this.start();
 	}
 

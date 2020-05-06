@@ -1077,10 +1077,11 @@ export class Battle {
 			side.activeRequest = null;
 		}
 
-		const maxTeamSize = this.getMaxTeamSize();
+		let maxTeamSize = this.getMaxTeamSize();
 		if (type === 'teampreview') {
-			this.add('teampreview' + (maxTeamSize !== 6 ? '|' + maxTeamSize : ''));
+			this.add('teampreview' + (maxTeamSize ? '|' + maxTeamSize : ''));
 		}
+		if (!maxTeamSize) maxTeamSize = 6;
 
 		const requests = this.getRequests(type, maxTeamSize);
 		for (let i = 0; i < this.sides.length; i++) {
@@ -1102,7 +1103,7 @@ export class Battle {
 
 	getMaxTeamSize() {
 		const teamLengthData = this.format.teamLength;
-		return teamLengthData?.battle || 6;
+		return teamLengthData?.battle;
 	}
 
 	getRequests(type: RequestState, maxTeamSize: number) {
