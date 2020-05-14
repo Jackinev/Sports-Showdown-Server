@@ -4003,12 +4003,12 @@ export const BattleFormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Past",
 	},
 	chespin: {
-		randomBattleMoves: ["curse", "gyroball", "seedbomb", "stoneedge", "spikes", "synthesis"],
+		randomBattleMoves: ["substitute", "bellydrum", "seedbomb", "drainpunch"],
 		isNonstandard: "Past",
 		tier: "LC",
 	},
 	quilladin: {
-		randomBattleMoves: ["curse", "gyroball", "seedbomb", "stoneedge", "spikes", "synthesis"],
+		randomBattleMoves: ["leechseed", "synthesis", "spikes", "drainpunch", "toxic", "seedbomb"],
 		isNonstandard: "Past",
 		tier: "NFE",
 	},
@@ -4418,7 +4418,7 @@ export const BattleFormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Uber",
 	},
 	diancie: {
-		randomBattleMoves: ["reflect", "lightscreen", "stealthrock", "diamondstorm", "moonblast", "mysticalfire", "bodypress"],
+		randomBattleMoves: ["healbell", "toxic", "stealthrock", "diamondstorm", "moonblast", "mysticalfire", "bodypress"],
 		isNonstandard: "Past",
 		tier: "RU",
 	},
