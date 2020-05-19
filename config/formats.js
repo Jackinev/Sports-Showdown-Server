@@ -170,6 +170,18 @@ const Formats = [
 		section: "Custom League Tiers",
 	},
 	{
+		name: "[Gen 8] (National Dex) BBL",
+
+		mod: 'gen8',
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
+		
+		onBegin() {
+			for (let pokemon of this.getAllPokemon()) {
+				if (!pokemon.canGigantamax) pokemon.canDynamax = false;
+			}
+		},
+	},
+	{
 		name: "[Gen 8] (National Dex) CAPtyLtd",
 
 		mod: 'gen8',
@@ -272,7 +284,6 @@ const Formats = [
 		name: "[Gen 7] DS Timer Draft League",
 
 		mod: 'gen7',
-		timer: {starting: 600*60, addPerTurn: 0, maxPerTurn: 100, maxFirstTurn: 90, timeoutAutoChoose: true, dcTimerBank: false},
 		ruleset: ['[Gen 7] Draft League'],
 	},
 	{
