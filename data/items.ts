@@ -1514,7 +1514,6 @@ export const BattleItems: {[itemid: string]: ItemData} = {
 			basePower: 50,
 		},
 		onAfterBoost(boost, target, source, effect) {
-			if (this.activeMove?.id === 'partingshot') return;
 			let eject = false;
 			let i: BoostName;
 			for (i in boost) {

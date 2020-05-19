@@ -156,18 +156,14 @@ export class Roomlog {
 		if (!Roomlogs.rollLogTimer) void Roomlogs.rollLogs();
 	}
 	add(message: string) {
+		if (message.startsWith('|uhtmlchange|')) return this.uhtmlchange(message);
 		this.roomlog(message);
-		message = this.withTimestamp(message);
+		if (this.logTimes && message.startsWith('|c|')) {
+			message = '|c:|' + (~~(Date.now() / 1000)) + '|' + message.substr(3);
+		}
 		this.log.push(message);
 		this.broadcastBuffer += message + '\n';
 		return this;
-	}
-	private withTimestamp(message: string) {
-		if (this.logTimes && message.startsWith('|c|')) {
-			return `|c:|${Math.trunc(Date.now() / 1000)}|${message.slice(3)}`;
-		} else {
-			return message;
-		}
 	}
 	hasUsername(username: string) {
 		const userid = toID(username);
@@ -183,12 +179,14 @@ export class Roomlog {
 		return false;
 	}
 	clearText(userids: ID[], lineCount = 0) {
+		const messageStart = this.logTimes ? '|c:|' : '|c|';
+		const section = this.logTimes ? 4 : 3; // ['', 'c' timestamp?, author, message]
 		const cleared: ID[] = [];
 		const clearAll = (lineCount === 0);
 		this.log = this.log.reverse().filter(line => {
-			const parsed = this.parseChatLine(line);
-			if (parsed) {
-				const userid = toID(parsed.user);
+			if (line.startsWith(messageStart)) {
+				const parts = Chat.splitFirst(line, '|', section);
+				const userid = toID(parts[section - 1]);
 				if (userids.includes(userid)) {
 					if (!cleared.includes(userid)) cleared.push(userid);
 					if (this.roomid.startsWith('battle-')) return true; // Don't remove messages in battle rooms to preserve evidence
@@ -204,35 +202,17 @@ export class Roomlog {
 		}).reverse();
 		return cleared;
 	}
-	uhtmlchange(name: string, message: string) {
-		const originalStart = '|uhtml|' + name + '|';
-		const fullMessage = originalStart + message;
+	uhtmlchange(message: string) {
+		const thirdPipe = message.indexOf('|', 13);
+		const originalStart = '|uhtml|' + message.slice(13, thirdPipe + 1);
 		for (const [i, line] of this.log.entries()) {
 			if (line.startsWith(originalStart)) {
-				this.log[i] = fullMessage;
+				this.log[i] = originalStart + message.slice(thirdPipe + 1);
 				break;
 			}
 		}
-		this.broadcastBuffer += fullMessage + '\n';
-	}
-	attributedUhtmlchange(user: User, name: string, message: string) {
-		const start = `/uhtml ${name},`;
-		const fullMessage = this.withTimestamp(`|c|${user.getIdentity()}|${start}${message}`);
-		for (const [i, line] of this.log.entries()) {
-			if (this.parseChatLine(line)?.message.startsWith(start)) {
-				this.log[i] = fullMessage;
-				break;
-			}
-		}
-		this.broadcastBuffer += fullMessage + '\n';
-	}
-	private parseChatLine(line: string) {
-		const messageStart = this.logTimes ? '|c:|' : '|c|';
-		const section = this.logTimes ? 4 : 3; // ['', 'c' timestamp?, author, message]
-		if (line.startsWith(messageStart)) {
-			const parts = Chat.splitFirst(line, '|', section);
-			return {user: parts[section - 1], message: parts[section]};
-		}
+		this.broadcastBuffer += message + '\n';
+		return this;
 	}
 	roomlog(message: string, date = new Date()) {
 		if (!this.roomlogStream) return;
@@ -274,7 +254,6 @@ export class Roomlog {
 		}
 		if (roomlogStreamExisted) {
 			this.roomlogStream = undefined;
-			this.roomlogFilename = "";
 			await this.setupRoomlogStream(true);
 		}
 		return true;

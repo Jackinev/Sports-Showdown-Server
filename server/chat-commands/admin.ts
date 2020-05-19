@@ -90,11 +90,8 @@ export const commands: ChatCommands = {
 			html += Chat.html`<div style="float:right;color:#888;font-size:8pt">[${user.name}]</div><div style="clear:both"></div>`;
 		}
 
-		if (cmd === 'changeuhtml') {
-			room.attributedUhtmlchange(user, name, html);
-		} else {
-			return `/uhtml ${name},${html}`;
-		}
+		html = `/uhtml${(cmd === 'changeuhtml' ? 'change' : '')} ${name},${html}`;
+		return html;
 	},
 	adduhtmlhelp: [
 		`/adduhtml [name], [message] - Shows everyone a message that can change, parsing HTML code contained.  Requires: * & ~`,
