@@ -263,7 +263,21 @@ export class PageContext extends MessageContext {
 		parts.shift();
 		while (handler) {
 			if (typeof handler === 'function') {
-				let res = await handler.bind(this)(parts, this.user, this.connection);
+				let res;
+				try {
+					res = await handler.call(this, parts, this.user, this.connection);
+				} catch (err) {
+					Monitor.crashlog(err, 'A chat page', {
+						user: this.user.name,
+						room: this.room && this.room.roomid,
+						pageid: this.pageid,
+					});
+					this.send(
+						`<div class="pad"><p class="message-error">` +
+						`Pokemon Showdown crashed!</b><br />Don't worry, we're working on fixing it.` +
+						`</p></div>`
+				  );
+				}
 				if (typeof res === 'string') {
 					this.send(res);
 					res = undefined;
@@ -747,6 +761,13 @@ export class CommandContext extends MessageContext {
 		}
 		return true;
 	}
+	canUseConsole() {
+		if (!this.user.hasConsoleAccess(this.connection)) {
+			this.errorReply(this.cmdToken + this.fullCmd + " - Requires console access, please set up `Config.consoleips`.");
+			return false;
+		}
+		return true;
+	}
 	shouldBroadcast() {
 		return this.cmdToken === BROADCAST_TOKEN;
 	}
@@ -754,12 +775,12 @@ export class CommandContext extends MessageContext {
 		if (!this.broadcasting && this.shouldBroadcast()) {
 			if (this.room instanceof Rooms.GlobalRoom) {
 				this.errorReply(`You have no one to broadcast this to.`);
-				this.errorReply(`To see it for yourself, use: /${this.message.substr(1)}`);
+				this.errorReply(`To see it for yourself, use: /${this.message.slice(1)}`);
 				return false;
 			}
 			if (!this.pmTarget && !this.user.can('broadcast', null, this.room)) {
 				this.errorReply(`You need to be voiced to broadcast this command's information.`);
-				this.errorReply(`To see it for yourself, use: /${this.message.substr(1)}`);
+				this.errorReply(`To see it for yourself, use: /${this.message.slice(1)}`);
 				return false;
 			}
 
@@ -774,7 +795,10 @@ export class CommandContext extends MessageContext {
 			}
 
 			const message = this.canTalk(suppressMessage || this.message);
-			if (!message) return false;
+			if (!message) {
+				this.errorReply(`To see it for yourself, use: /${this.message.slice(1)}`);
+				return false;
+			}
 
 			// canTalk will only return true with no message
 			this.message = message;
