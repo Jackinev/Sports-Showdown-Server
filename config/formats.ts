@@ -205,7 +205,7 @@ const Formats = [
 	{
 		section: "Custom League Tiers",
 	},
-	{
+	/*{
 		name: "[Gen 8] (National Dex) APA Gym Challenge",
 
 		mod: 'gen8',
@@ -233,7 +233,7 @@ const Formats = [
 			'Lycanium Z', 'Marshadium Z', 'Mewnium Z', 'Mimikium Z', 'Pikanium Z', 'Pikashunium Z', 'Primarium Z', 'Snorlium Z', 
 			'Solganium Z', 'Tapunium Z', 'Ultranecrozium Z',
 		],
-	},
+	},*/
 	{
 		name: "[Gen 8] (National Dex) BBL",
 
