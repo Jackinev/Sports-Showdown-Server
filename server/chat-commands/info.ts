@@ -582,7 +582,7 @@ export const commands: ChatCommands = {
 						Gen: String(pokemon.gen) || 'CAP',
 						Height: `${pokemon.heightm} m`,
 					};
-					if (!pokemon.forme || pokemon.forme !== "Gmax") {
+					if (pokemon.forme !== "Gmax" || dex.currentMod === 'megamax') {
 						details["Weight"] = `${pokemon.weighthg / 10} kg <em>(${weighthit} BP)</em>`;
 					} else {
 						details["Weight"] = "0 kg <em>(GK/LK fail)</em>";
@@ -2548,7 +2548,7 @@ export const commands: ChatCommands = {
 				return this.errorReply('Invalid image');
 			}
 		}
-		if (comment) buf += Utils.html`<br>(${comment})</div>`;
+		if (comment) buf += Utils.html`<br>(${comment.trim()})</div>`;
 
 		if (!this.canBroadcast()) return false;
 		if (this.broadcastMessage) {

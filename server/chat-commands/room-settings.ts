@@ -139,12 +139,12 @@ export const commands: ChatCommands = {
 		const groupConfig = Config.groups[Users.PLAYER_SYMBOL];
 		if (!groupConfig?.editprivacy) return this.errorReply(`/ionext - Access denied.`);
 		if (this.meansNo(target)) {
-			user.inviteOnlyNextBattle = false;
-			user.update('inviteOnlyNextBattle');
+			user.battleSettings.inviteOnly = false;
+			user.update();
 			this.sendReply("Your next battle will be publicly visible.");
 		} else {
-			user.inviteOnlyNextBattle = true;
-			user.update('inviteOnlyNextBattle');
+			user.battleSettings.inviteOnly = true;
+			user.update();
 			if (user.forcedPublic) {
 				return this.errorReply(`Your next battle will be invite-only provided it is not rated, otherwise your '${user.forcedPublic}' prefix will force the battle to be public.`);
 			}
@@ -596,9 +596,12 @@ export const commands: ChatCommands = {
 	 *********************************************************/
 
 	makeprivatechatroom: 'makechatroom',
+	makepublicchatroom: 'makechatroom',
 	makechatroom(target, room, user, connection, cmd) {
 		if (!room) return this.requiresRoom();
 		if (!this.can('makeroom')) return;
+		const id = toID(target);
+		if (!id || this.cmd === 'makechatroom') return this.parse('/help makechatroom');
 
 		// `,` is a delimiter used by a lot of /commands
 		// `|` and `[` are delimiters used by the protocol
@@ -607,8 +610,6 @@ export const commands: ChatCommands = {
 			return this.errorReply("Room titles can't contain any of: ,|[-");
 		}
 
-		const id = toID(target);
-		if (!id) return this.parse('/help makechatroom');
 		if (id.length > MAX_CHATROOM_ID_LENGTH) return this.errorReply("The given room title is too long.");
 		// Check if the name already exists as a room or alias
 		if (Rooms.search(id)) return this.errorReply(`The room '${target}' already exists.`);
@@ -640,7 +641,10 @@ export const commands: ChatCommands = {
 			this.sendReply(`The chat room '${target}' was created.`);
 		}
 	},
-	makechatroomhelp: [`/makechatroom [roomname] - Creates a new room named [roomname]. Requires: &`],
+	makechatroomhelp: [
+		`/makeprivatechatroom [roomname] - Creates a new private room named [roomname]. Requires: &`,
+		`/makepublicchatroom [roomname] - Creates a new public room named [roomname]. Requires: &`,
+	],
 
 	subroomgroupchat: 'makegroupchat',
 	makegroupchat(target, room, user, connection, cmd) {
@@ -984,6 +988,27 @@ export const commands: ChatCommands = {
 		`/secretroom - Makes a room secret. Secret rooms are visible to & and up. Requires: &`,
 		`/hiddenroom [on/off] - Makes a room hidden. Hidden rooms are visible to % and up, and inherit global ranks. Requires: \u2606 &`,
 		`/publicroom - Makes a room public. Requires: \u2606 &`,
+	],
+
+	hidenext(target, room, user) {
+		const groupConfig = Config.groups[Users.PLAYER_SYMBOL];
+		if (!groupConfig?.editprivacy) return this.errorReply(`/hidenext - Access denied.`);
+		if (this.meansNo(target)) {
+			user.battleSettings.hidden = false;
+			user.update();
+			this.sendReply("Your next battle will be publicly visible.");
+		} else {
+			user.battleSettings.hidden = true;
+			user.update();
+			if (user.forcedPublic) {
+				return this.errorReply(`Your next battle will be hidden provided it is not rated, otherwise your '${user.forcedPublic}' prefix will force the battle to be public.`);
+			}
+			this.sendReply("Your next battle will be hidden");
+		}
+	},
+	hidenexthelp: [
+		`/hidenext - Sets your next battle to be hidden.`,
+		`/hidenext off - Sets your next battle to be publicly visible.`,
 	],
 
 	officialchatroom: 'officialroom',

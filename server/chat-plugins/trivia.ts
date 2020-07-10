@@ -32,8 +32,6 @@ const MODES: {[k: string]: string} = {
 	number: 'Number',
 	timer: 'Timer',
 	triumvirate: 'Triumvirate',
-	tri: 'Triumvirate',
-	triforce: 'Triumvirate',
 };
 
 const LENGTHS: {[k: string]: {cap: number, prizes: number[]}} = {
@@ -130,17 +128,16 @@ function isTriviaRoom(room: Room) {
 	return false;
 }
 
-function getTriviaGame(context: CommandContext) {
-	const room = context.room;
-	if (!room) return false;
+function getTriviaGame(room: Room | null) {
+	if (!room) {
+		throw new Chat.ErrorMessage(`This command can only be used in the Trivia room.`);
+	}
 	const game = room.game;
 	if (!game) {
-		context.errorReply(`There is no game in progress.`);
-		return false;
+		throw new Chat.ErrorMessage(`There is no game in progress.`);
 	}
 	if (!game.constructor.name.endsWith('Trivia')) {
-		context.errorReply(`The currently running game is not Trivia, it's ${game.title}.`);
-		return false;
+		throw new Chat.ErrorMessage(`The currently running game is not Trivia, it's ${game.title}.`);
 	}
 	return game as Trivia;
 }
@@ -1075,6 +1072,7 @@ const commands: ChatCommands = {
 		if (targets.length < 3) return this.errorReply("Usage: /trivia new [mode], [category], [length]");
 
 		let mode: string = toID(targets[0]);
+		if (['triforce', 'tri'].includes(mode)) mode = 'triumvirate';
 		const isRandomMode = (mode === 'random');
 		if (isRandomMode) {
 			mode = Utils.shuffle(['first', 'number', 'timer', 'triumvirate'])[0];
@@ -1086,7 +1084,8 @@ const commands: ChatCommands = {
 		const isAll = (category === 'all');
 		let questions;
 		if (isRandomCategory) {
-			const categories = Object.keys(MAIN_CATEGORIES);
+			const lastCategoryID = toID(triviaData.history?.slice(-1)[0].category).replace("random", "");
+			const categories = Object.keys(MAIN_CATEGORIES).filter(cat => toID(MAIN_CATEGORIES[cat]) !== lastCategoryID);
 			const randCategory = categories[Math.floor(Math.random() * categories.length)];
 			questions = sliceCategory(randCategory);
 		} else if (isAll) {
@@ -1118,7 +1117,7 @@ const commands: ChatCommands = {
 			_Trivia = FirstModeTrivia;
 		} else if (mode === 'number') {
 			_Trivia = NumberModeTrivia;
-		} else if (mode === 'triumvirate' || mode === 'tri' || mode === 'triforce') {
+		} else if (mode === 'triumvirate') {
 			_Trivia = TriumvirateModeTrivia;
 		} else {
 			_Trivia = TimerModeTrivia;
@@ -1131,9 +1130,8 @@ const commands: ChatCommands = {
 
 	join(target, room, user) {
 		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
+
 		const res = game.addTriviaPlayer(user);
 		if (res) return this.errorReply(res);
 		this.sendReply('You are now signed up for this game!');
@@ -1142,11 +1140,9 @@ const commands: ChatCommands = {
 
 	kick(target, room, user) {
 		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
-		if (!this.can('mute', null, room)) return false;
 		if (!this.canTalk()) return;
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
+		if (!this.can('mute', null, room)) return false;
 
 		this.splitTarget(target);
 		const targetUser = this.targetUser;
@@ -1158,23 +1154,20 @@ const commands: ChatCommands = {
 	kickhelp: [`/trivia kick [username] - Kick players from a trivia game by username. Requires: % @ # &`],
 
 	leave(target, room, user) {
-		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
+
 		const res = game.leave(user);
 		if (res) return this.errorReply(res);
-		this.sendReply("You have left the current game of trivia.");
+		this.sendReply("You have left the current game of Trivia.");
 	},
 	leavehelp: [`/trivia leave - Makes the player leave the game.`],
 
 	start(target, room) {
 		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
 		if (!this.can('show', null, room)) return false;
 		if (!this.canTalk()) return;
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
+
 		const res = game.start();
 		if (res) return this.errorReply(res);
 		// ...
@@ -1183,9 +1176,7 @@ const commands: ChatCommands = {
 
 	answer(target, room, user) {
 		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
 
 		const answer = toID(target);
 		if (!answer) return this.errorReply("No valid answer was entered.");
@@ -1202,11 +1193,10 @@ const commands: ChatCommands = {
 
 	end(target, room, user) {
 		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
 		if (!this.can('show', null, room)) return false;
 		if (!this.canTalk()) return;
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
+
 		game.end(user);
 	},
 	endhelp: [`/trivia end - Forcibly end a trivia game. Requires: + % @ # &`],
@@ -1215,10 +1205,9 @@ const commands: ChatCommands = {
 	players: 'status',
 	status(target, room, user) {
 		if (!room) return this.requiresRoom();
-		if (!isTriviaRoom(room)) return this.errorReply("This command can only be used in Trivia.");
 		if (!this.runBroadcast()) return false;
-		const game = getTriviaGame(this);
-		if (!game) return;
+		const game = getTriviaGame(room);
+
 		let tarUser;
 		if (target) {
 			this.splitTarget(target);
