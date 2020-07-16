@@ -569,6 +569,7 @@ exports.grouplist = [
 		name: "Bot",
 		inherit: '%',
 		jurisdiction: 'u',
+		globalGroupInPersonalRoom: '*',
 
 		addhtml: true,
 		declare: true,

@@ -41,8 +41,15 @@ export type ChatHandler = (
 	cmd: string,
 	message: string
 ) => void;
+export type AnnotatedChatHandler = ChatHandler & {
+	requiresRoom: boolean,
+	broadcastable: boolean,
+};
 export interface ChatCommands {
 	[k: string]: ChatHandler | string | string[] | ChatCommands;
+}
+export interface AnnotatedChatCommands {
+	[k: string]: AnnotatedChatHandler | string | string[] | true | AnnotatedChatCommands;
 }
 
 export type SettingsHandler = (
@@ -332,6 +339,7 @@ export class CommandContext extends MessageContext {
 	cmdToken: string;
 	target: string;
 	fullCmd: string;
+	isQuiet: boolean;
 	broadcasting: boolean;
 	broadcastToRoom: boolean;
 	broadcastMessage: string;
@@ -360,6 +368,7 @@ export class CommandContext extends MessageContext {
 		this.cmdToken = options.cmdToken || '';
 		this.target = options.target || ``;
 		this.fullCmd = options.fullCmd || '';
+		this.isQuiet = false;
 
 		// broadcast context
 		this.broadcasting = false;
@@ -372,10 +381,11 @@ export class CommandContext extends MessageContext {
 		this.inputUsername = "";
 	}
 
-	parse(msg?: string): any {
+	parse(msg?: string, quiet?: boolean): any {
 		if (typeof msg === 'string') {
 			// spawn subcontext
 			const subcontext = new CommandContext(this);
+			if (quiet) subcontext.isQuiet = true;
 			subcontext.recursionDepth++;
 			if (subcontext.recursionDepth > MAX_PARSE_RECURSION) {
 				throw new Error("Too much command recursion");
@@ -503,7 +513,7 @@ export class CommandContext extends MessageContext {
 
 		if (cmd.endsWith(',')) cmd = cmd.slice(0, -1);
 
-		let curCommands: ChatCommands = Chat.commands;
+		let curCommands: AnnotatedChatCommands = Chat.commands;
 		let commandHandler;
 		let fullCmd = cmd;
 
@@ -530,7 +540,7 @@ export class CommandContext extends MessageContext {
 				}
 
 				fullCmd += ' ' + cmd;
-				curCommands = commandHandler as ChatCommands;
+				curCommands = commandHandler as AnnotatedChatCommands;
 			}
 		} while (commandHandler && typeof commandHandler === 'object');
 
@@ -674,6 +684,7 @@ export class CommandContext extends MessageContext {
 		}).join(`\n`);
 	}
 	sendReply(data: string) {
+		if (this.isQuiet) return;
 		if (this.broadcasting && this.broadcastToRoom) {
 			// broadcasting
 			this.add(data);
@@ -976,7 +987,7 @@ export class CommandContext extends MessageContext {
 					return null;
 				}
 				if (Config.pmmodchat && !user.authAtLeast(Config.pmmodchat) &&
-					!Users.Auth.hasPermission(targetUser.group, 'promote', Config.pmmodchat as GroupSymbol)) {
+					!Users.Auth.hasPermission(targetUser, 'promote', Config.pmmodchat as GroupSymbol)) {
 					const groupName = Config.groups[Config.pmmodchat] && Config.groups[Config.pmmodchat].name || Config.pmmodchat;
 					this.errorReply(`On this server, you must be of rank ${groupName} or higher to PM users.`);
 					return null;
@@ -1305,10 +1316,10 @@ export const Chat = new class {
 	/*********************************************************
 	 * Load command files
 	 *********************************************************/
-	baseCommands: ChatCommands = undefined!;
-	commands: ChatCommands = undefined!;
-	basePages: PageTable = undefined!;
-	pages: PageTable = undefined!;
+	baseCommands!: AnnotatedChatCommands;
+	commands!: AnnotatedChatCommands;
+	basePages!: PageTable;
+	pages!: PageTable;
 	readonly destroyHandlers: (() => void)[] = [];
 	roomSettings: SettingsHandler[] = [];
 
@@ -1574,8 +1585,24 @@ export const Chat = new class {
 		}
 		this.loadPluginData(plugin);
 	}
+	annotateCommands(commandTable: AnyObject): AnnotatedChatCommands {
+		for (const cmd in commandTable) {
+			const entry = commandTable[cmd];
+			if (typeof entry === 'object') {
+				this.annotateCommands(entry);
+			}
+			if (typeof entry !== 'function') continue;
+
+			const handlerCode = entry.toString();
+			entry.requiresRoom = /\bthis\.requiresRoom\(/.test(handlerCode);
+			entry.broadcastable = /\bthis\.(?:canBroadcast|runBroadcast)\(/.test(handlerCode);
+		}
+		return commandTable;
+	}
 	loadPluginData(plugin: AnyObject) {
-		if (plugin.commands) Object.assign(Chat.commands, plugin.commands);
+		if (plugin.commands) {
+			Object.assign(Chat.commands, this.annotateCommands(plugin.commands));
+		}
 		if (plugin.pages) Object.assign(Chat.pages, plugin.pages);
 
 		if (plugin.destroy) Chat.destroyHandlers.push(plugin.destroy);

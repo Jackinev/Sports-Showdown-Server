@@ -772,7 +772,6 @@ export class RandomTeams {
 				case 'bulletpunch': case 'rockblast': case 'trickroom':
 					if (!!counter['speedsetup'] || counter.damagingMoves.length < 2) rejected = true;
 					break;
-
 				case 'flashcannon':
 					if (hasMove['substitute'] || hasMove['toxic'] && movePool.includes('substitute')) rejected = true;
 					break;
@@ -788,9 +787,6 @@ export class RandomTeams {
 					break;
 				case 'healingwish': case 'memento':
 					if (counter.setupType || !!counter['recovery'] || hasMove['substitute'] || hasMove['uturn']) rejected = true;
-					break;
-				case 'highjumpkick': case '`hpunch':
-					if (hasMove['curse']) rejected = true;
 					break;
 				case 'leechseed': case 'roar': case 'teleport': case 'whirlwind':
 					if (counter.setupType || !!counter['speedsetup'] || hasMove['dragontail']) rejected = true;
@@ -855,7 +851,7 @@ export class RandomTeams {
 				case 'blueflare':
 					if (hasMove['vcreate']) rejected = true;
 					break;
-				case 'fierydance': case 'firefang': 
+				case 'fierydance': case 'firefang':
 					if (hasMove['blazekick'] || hasMove['heatwave'] || hasMove['overheat']) rejected = true;
 					if ((hasMove['fireblast'] || hasMove['lavaplume']) && counter.setupType !== 'Physical') rejected = true;
 					break;
@@ -870,9 +866,6 @@ export class RandomTeams {
 					break;
 				case 'overheat':
 					if (hasMove['fireblast'] || hasMove['flareblitz'] || hasMove['lavaplume']) rejected = true;
-					break;
-				case 'firefang':
-					if (hasMove['fireblast'] && !counter.setupType) rejected = true;
 					break;
 				case 'firepunch': case 'flamethrower':
 					if (hasMove['blazekick'] || hasMove['curse'] || hasMove['heatwave'] || hasMove['overheat'] || hasMove['shiftgear']) rejected = true;
@@ -974,21 +967,16 @@ export class RandomTeams {
 				case 'bugbuzz':
 					if (hasMove['uturn'] && !counter.setupType) rejected = true;
 					break;
-				case 'bonemerang': case 'precipiceblades':
-					if (hasMove['earthquake']) rejected = true;
-					break;
 				case 'earthpower':
 					if (hasMove['earthquake'] && counter.setupType !== 'Special') rejected = true;
 					break;
 				case 'stoneedge':
 					if (hasMove['rockblast'] || hasMove['rockslide'] || !!counter.Status && movePool.includes('rockslide')) rejected = true;
-					if ((hasAbility['Guts'] && !hasMove['dynamicpunch']) || hasAbility['Iron Fist'] && movePool.includes('machpunch')) rejected = true;
+					if (hasAbility['Guts'] && (!hasMove['dynamicpunch'] || hasMove['spikes'])) rejected = true;
+					if (hasAbility['Iron Fist'] && movePool.includes('machpunch')) rejected = true;
 					break;
 				case 'airslash':
 					if (hasMove['hurricane'] && !counter.setupType || (hasAbility['Simple'] && !!counter['recovery'])) rejected = true;
-					break;
-				case 'bravebird':
-					if (hasMove['dragondance']) rejected = true;
 					break;
 				case 'hurricane':
 					if ((hasMove['airslash'] || movePool.includes('airslash')) && counter.setupType) rejected = true;
@@ -1011,10 +999,6 @@ export class RandomTeams {
 				case 'shadowpunch':
 					if (hasMove['shadowsneak'] || hasMove['earthquake'] && !hasType['Ground']) rejected = true;
 					if (hasMove['dynamicpunch']) rejected = true;
-					break;
-				case 'shadowsneak':
-					if (!hasType['Ghost'] && !!counter['recovery']) rejected = true;
-					if (hasMove['substitute'] || hasMove['toxic'] || hasMove['trickroom']) rejected = true;
 					break;
 				case 'dragonpulse': case 'outrage':
 					if (hasMove['dracometeor'] && counter.Special < 4) rejected = true;
@@ -1093,7 +1077,7 @@ export class RandomTeams {
 				if (!['bellydrum', 'shellsmash', 'clangoroussoul', 'quiverdance', 'superpower'].includes(moveid) && isSetup && teamDetails.setup && teamDetails.setup > 2) rejected = true;
 
 				// This move doesn't satisfy our setup requirements:
-				if ((move.category === 'Physical' && counter.setupType === 'Special') || (move.category === 'Special' && counter.setupType === 'Physical')) {
+				if (((move.category === 'Physical' && counter.setupType === 'Special') || (move.category === 'Special' && counter.setupType === 'Physical')) && moveid !== 'photongeyser') {
 					// Reject STABs last in case the setup type changes later on
 					const stabs: number = counter[species.types[0]] + (counter[species.types[1]] || 0);
 					if (!hasType[move.type] || stabs > 1 || counter[move.category] < 2) rejected = true;
@@ -1219,6 +1203,8 @@ export class RandomTeams {
 					rejectAbility = (this.dex.getEffectiveness('Fire', species) < -1);
 				} else if (ability === 'Gluttony') {
 					rejectAbility = !hasMove['bellydrum'];
+				} else if (ability === 'Guts') {
+					rejectAbility = (counter.damagingMoves.length > 3 && !hasMove['facade']);
 				} else if (ability === 'Harvest') {
 					rejectAbility = hasAbility['Frisk'];
 				} else if (ability === 'Hustle') {
@@ -1607,6 +1593,8 @@ export class RandomTeams {
 			}
 			evs.hp -= 4;
 		}
+
+		if (hasMove['shellsidearm'] && item === 'Choice Specs') evs.atk -= 4;
 
 		// Minimize confusion damage
 		if (!counter['Physical'] && !hasMove['transform'] && (!hasMove['shellsidearm'] || !counter.Status)) {
