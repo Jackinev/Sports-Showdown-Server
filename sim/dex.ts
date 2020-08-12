@@ -1490,6 +1490,15 @@ export class ModdedDex {
 							if (key in childTypedData[entryId]) continue;
 							childTypedData[entryId][key] = parentTypedData[entryId][key];
 						}
+						
+						if (childTypedData[entryId]["learnset"] && childTypedData[entryId]["learnset"].inherit) {
+							delete childTypedData[entryId]["learnset"].inherit;
+							
+							for (const key in parentTypedData[entryId]["learnset"]) {
+								if (key in childTypedData[entryId]["learnset"]) continue;
+								childTypedData[entryId]["learnset"][key] = parentTypedData[entryId]["learnset"][key];
+							}
+						}
 					}
 				}
 			}
