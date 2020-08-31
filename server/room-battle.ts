@@ -486,6 +486,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 	p2: RoomBattlePlayer;
 	p3: RoomBattlePlayer;
 	p4: RoomBattlePlayer;
+	inviteOnlySetter: ID | null;
 	logData: AnyObject | null;
 	endType: string;
 	/**
@@ -528,6 +529,7 @@ export class RoomBattle extends RoomGames.RoomGame {
 		this.p2 = null!;
 		this.p3 = null!;
 		this.p4 = null!;
+		this.inviteOnlySetter = null!;
 
 		// data to be logged
 		this.allowExtraction = {};
@@ -705,11 +707,9 @@ export class RoomBattle extends RoomGames.RoomGame {
 	}
 
 	async listen() {
-		let next;
 		let disconnected = false;
 		try {
-			// tslint:disable-next-line: no-conditional-assignment
-			while ((next = await this.stream.read())) {
+			for await (const next of this.stream) {
 				this.receive(next.split('\n'));
 			}
 		} catch (err) {
