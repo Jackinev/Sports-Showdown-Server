@@ -706,6 +706,9 @@ export class RandomTeams {
 				case 'switcheroo': case 'trick':
 					if (counter.Physical + counter.Special < 3 || hasMove['rapidspin']) rejected = true;
 					break;
+				case 'trickroom':
+					if (counter.damagingMoves.length < 2 || movePool.includes('nastyplot')) rejected = true;
+					break;
 				case 'zenheadbutt':
 					if (hasMove['psychic'] || movePool.includes('bellydrum') || movePool.includes('highjumpkick') || hasMove['bellydrum'] && hasMove['substitute']) rejected = true;
 					break;
@@ -768,21 +771,21 @@ export class RandomTeams {
 					break;
 
 				// Bad after setup
-				case 'bounce': case 'counter': case 'irontail':
+				case 'counter': case 'irontail':
 					if (counter.setupType) rejected = true;
 					break;
 				case 'firstimpression': case 'glare': case 'icywind': case 'tailwind': case 'waterspout':
 					if (counter.setupType || !!counter['speedsetup'] || hasMove['rest']) rejected = true;
 					break;
-				case 'bulletpunch': case 'rockblast': case 'trickroom':
+				case 'bulletpunch': case 'rockblast':
 					if (!!counter['speedsetup'] || counter.damagingMoves.length < 2) rejected = true;
 					break;
 				case 'flashcannon':
 					if (hasMove['substitute'] || hasMove['toxic'] && movePool.includes('substitute')) rejected = true;
 					break;
 				case 'circlethrow': case 'dragontail':
-					if (!!counter['speedsetup'] || hasMove['encore'] || !(hasMove['rest'] && hasMove['sleeptalk'])) rejected = true;
-					if (hasMove['psyshock'] && !!counter.Status) rejected = true;
+					if (!!counter['speedsetup'] || hasMove['encore'] || hasMove['psyshock'] && !!counter.Status) rejected = true;
+					if (hasMove['haze']) rejected = true;
 					break;
 				case 'dracometeor': case 'stormthrow':
 					if (hasMove['rest'] && hasMove['sleeptalk']) rejected = true;
@@ -886,7 +889,7 @@ export class RandomTeams {
 				case 'aquajet': case 'psychicfangs':
 					if (hasMove['rapidspin'] || hasMove['taunt']) rejected = true;
 					break;
-				case 'flipturn':
+				case 'aquatail': case 'flipturn':
 					if (hasMove['aquajet'] || !!counter.Status) rejected = true;
 					break;
 				case 'hydropump':
@@ -908,9 +911,6 @@ export class RandomTeams {
 				case 'gigadrain':
 					if (hasMove['powerwhip'] || hasMove['leafblade'] || hasMove['energyball'] || hasMove['leafstorm'] || hasMove['solarbeam'] || hasType['Poison'] && !counter['Poison']) rejected = true;
 					break;
-				case 'grassknot':
-					if (hasMove['surf']) rejected = true;
-					break;
 				case 'leafstorm':
 					if (hasMove['gigadrain'] && !!counter.Status) rejected = true;
 					if (isDoubles && hasMove['energyball']) rejected = true;
@@ -919,7 +919,7 @@ export class RandomTeams {
 					if (hasMove['leechlife'] || !hasType['Grass'] && counter.Physical > 3 && movePool.includes('uturn')) rejected = true;
 					break;
 				case 'woodhammer':
-					if (hasMove['grassyglide'] || hasMove['hornleech'] && counter.Physical < 4) rejected = true;
+					if (hasMove['hornleech'] && counter.Physical < 4) rejected = true;
 					break;
 				case 'freezedry':
 					if ((hasMove['blizzard'] && counter.setupType) || hasMove['icebeam'] && counter.Special < 4) rejected = true;
@@ -1024,6 +1024,7 @@ export class RandomTeams {
 					break;
 				case 'knockoff':
 					if (hasMove['foulplay'] || !!counter['speedsetup']) rejected = true;
+					if (hasMove['darkestlariat']) rejected = true;
 					break;
 				case 'suckerpunch':
 					if (counter.damagingMoves.length < 2 || counter['Dark'] > 1 && !hasType['Dark']) rejected = true;
@@ -1047,7 +1048,7 @@ export class RandomTeams {
 					if (moveid === 'bodyslam' && hasMove['doubleedge']) rejected = true;
 					break;
 				case 'haze':
-					if (hasMove['stealthrock'] || movePool.includes('stealthrock') && !teamDetails.stealthRock) rejected = true;
+					if ((hasMove['stealthrock'] || movePool.includes('stealthrock')) && !teamDetails.stealthRock) rejected = true;
 					break;
 				case 'hypnosis': case 'willowisp': case 'yawn':
 					if (hasMove['thunderwave'] || hasMove['toxic']) rejected = true;
@@ -1102,7 +1103,7 @@ export class RandomTeams {
 					(hasType['Fairy'] && !counter['Fairy'] && !hasType['Flying'] && !hasAbility['Pixilate']) ||
 					(hasType['Fighting'] && (!counter['Fighting'] || !counter.stab)) ||
 					(hasType['Fire'] && (!counter['Fire'] || movePool.includes('flareblitz')) && !hasMove['bellydrum']) ||
-					((hasType['Flying'] || hasMove['swordsdance']) && !counter['Flying'] && (movePool.includes('airslash') || movePool.includes('bravebird') || movePool.includes('oblivionwing'))) ||
+					((hasType['Flying'] || hasMove['swordsdance']) && !counter['Flying'] && (movePool.includes('airslash') || movePool.includes('bravebird') || movePool.includes('dualwingbeat') || movePool.includes('oblivionwing'))) ||
 					(hasType['Ghost'] && (!counter['Ghost'] || movePool.includes('poltergeist') || movePool.includes('spectralthief')) && !counter['Dark']) ||
 					(hasType['Grass'] && !counter['Grass'] && (hasAbility['Grassy Surge'] || !hasType['Fairy'] && !hasType['Poison'] && !hasType['Steel'])) ||
 					(hasType['Ground'] && !counter['Ground']) ||
@@ -1139,7 +1140,7 @@ export class RandomTeams {
 
 				// Remove rejected moves from the move list
 				if (rejected && movePool.length) {
-					if (move.category !== 'Status' && !move.damage && !move.flags.charge) rejectedPool.push(moves[k]);
+					if (move.category !== 'Status' && !move.damage) rejectedPool.push(moves[k]);
 					moves.splice(k, 1);
 					break;
 				}
@@ -1229,6 +1230,8 @@ export class RandomTeams {
 					rejectAbility = species.types.includes('Ground');
 				} else if (ability === 'Limber') {
 					rejectAbility = species.types.includes('Electric');
+				} else if (ability === 'Liquid Voice') {
+					rejectAbility = !hasMove['hypervoice'];
 				} else if (ability === 'Magic Guard' || ability === 'Speed Boost') {
 					rejectAbility = hasAbility['Tinted Lens'] && (!counter['Status'] || hasMove['uturn']);
 				} else if (ability === 'Misty Surge') {
@@ -1281,6 +1284,8 @@ export class RandomTeams {
 					rejectAbility = (!counter['technician'] || hasMove['tailslap'] || hasAbility['Punk Rock'] || movePool.includes('snarl'));
 				} else if (ability === 'Tinted Lens') {
 					rejectAbility = (hasMove['defog'] || hasMove['hurricane'] || counter.Status > 2 && !counter.setupType);
+				} else if (ability === 'Torrent') {
+					rejectAbility = hasMove['hypervoice'];
 				} else if (ability === 'Tough Claws') {
 					rejectAbility = (hasType['Steel'] && !hasMove['fakeout']);
 				} else if (ability === 'Triage') {
@@ -1356,6 +1361,8 @@ export class RandomTeams {
 				ability = 'Scrappy';
 			} else if (hasAbility['Guts'] && (hasMove['facade'] || (hasMove['rest'] && hasMove['sleeptalk']))) {
 				ability = 'Guts';
+			} else if (hasAbility['Moxie'] && (counter.Physical > 3 || hasMove['bounce']) && !isDoubles) {
+				ability = 'Moxie';
 			} else if (isDoubles) {
 				if (hasAbility['Competitive'] && ability !== 'Shadow Tag' && ability !== 'Strong Jaw') ability = 'Competitive';
 				if (hasAbility['Friend Guard']) ability = 'Friend Guard';
@@ -1391,6 +1398,8 @@ export class RandomTeams {
 			item = isDoubles ? 'Iron Ball' : 'Toxic Orb';
 		} else if (species.baseSpecies === 'Marowak') {
 			item = 'Thick Club';
+		} else if (species.name === 'Oranguru') {
+			item = 'Colbur Berry';
 		} else if (species.baseSpecies === 'Pikachu') {
 			forme = 'Pikachu' + this.sample(['', '-Original', '-Hoenn', '-Sinnoh', '-Unova', '-Kalos', '-Alola', '-Partner']);
 			item = 'Light Ball';
@@ -1806,10 +1815,10 @@ export class RandomTeams {
 				}
 
 				// Track what the team has
+				if (set.ability === 'Drizzle' || set.moves.includes('raindance')) teamDetails['rain'] = 1;
+				if (set.ability === 'Drought' || set.moves.includes('sunnyday')) teamDetails['sun'] = 1;
 				if (set.ability === 'Snow Warning' || set.moves.includes('hail')) teamDetails['hail'] = 1;
-				if (set.moves.includes('raindance') || set.ability === 'Drizzle') teamDetails['rain'] = 1;
 				if (set.ability === 'Sand Stream') teamDetails['sand'] = 1;
-				if (set.moves.includes('sunnyday') || set.ability === 'Drought') teamDetails['sun'] = 1;
 				if (set.moves.includes('spikes')) teamDetails['spikes'] = (teamDetails['spikes'] || 0) + 1;
 				if (set.moves.includes('stealthrock')) teamDetails['stealthRock'] = 1;
 				if (set.moves.includes('stickyweb')) teamDetails['stickyWeb'] = 1;
