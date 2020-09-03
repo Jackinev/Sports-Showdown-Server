@@ -23,16 +23,11 @@ export class RandomTeams {
 	factoryTier: string;
 	format: Format;
 	prng: PRNG;
-	
-	randomCAP1v1Sets: AnyObject;
 
 	constructor(format: Format | string, prng: PRNG | PRNGSeed | null) {
 		format = Dex.getFormat(format);
 		this.dex = Dex.forFormat(format);
 		this.gen = this.dex.gen;
-		// this.randomFactorySets = randomFactorySets;
-		// this.randomBSSFactorySets = randomBSSFactorySets;
-		this.randomCAP1v1Sets = require('./cap-1v1-sets.json');
 
 		this.factoryTier = '';
 		this.format = format;
@@ -958,6 +953,9 @@ export class RandomTeams {
 					if (movePool.includes('bodypress') && movePool.includes('shellsmash')) rejected = true;
 					if (isDoubles && (hasMove['earthpower'] || hasMove['highhorsepower'])) rejected = true;
 					break;
+				case 'scorchingsands':
+					if (hasMove['earthpower'] || hasMove['toxic'] && movePool.includes('earthpower')) rejected = true;
+					break;
 				case 'photongeyser':
 					if (hasMove['morningsun']) rejected = true;
 					break;
@@ -993,6 +991,7 @@ export class RandomTeams {
 					break;
 				case 'poltergeist':
 					if (hasMove['knockoff']) rejected = true;
+					if (hasMove['shadowbone']) rejected = true;
 					break;
 				case 'shadowball':
 					if (hasMove['hex'] && hasMove['willowisp']) rejected = true;
@@ -1058,7 +1057,7 @@ export class RandomTeams {
 					if (counter.setupType || hasMove['energyball'] && !hasType['Grass']) rejected = true;
 					break;
 				case 'painsplit': case 'recover': case 'synthesis':
-					if (hasMove['rest'] || hasMove['wish']) rejected = true;
+					if (hasMove['rest'] || hasMove['wish'] || hasMove['strengthsap']) rejected = true;
 					if (moveid === 'synthesis' && hasMove['gigadrain']) rejected = true;
 					break;
 				case 'substitute':
@@ -1097,7 +1096,7 @@ export class RandomTeams {
 				(
 					(!counter.stab && !hasMove['nightshade'] && !hasMove['seismictoss'] && counter['physicalpool'] + counter['specialpool'] > 0) ||
 					(hasType['Bug'] && movePool.includes('megahorn')) ||
-					(hasType['Dark'] && (!counter['Dark'] || (hasMove['suckerpunch'] && movePool.includes('knockoff')))) ||
+					(hasType['Dark'] && (!counter['Dark'] || (hasMove['suckerpunch'] && (movePool.includes('knockoff') || movePool.includes('wickedblow'))))) ||
 					(hasType['Dragon'] && !counter['Dragon'] && !hasMove['substitute'] && !(hasMove['rest'] && hasMove['sleeptalk'])) ||
 					(hasType['Electric'] && (!counter['Electric'] || movePool.includes('thunder'))) ||
 					(hasType['Fairy'] && !counter['Fairy'] && !hasType['Flying'] && !hasAbility['Pixilate']) ||
@@ -1285,7 +1284,7 @@ export class RandomTeams {
 				} else if (ability === 'Tinted Lens') {
 					rejectAbility = (hasMove['defog'] || hasMove['hurricane'] || counter.Status > 2 && !counter.setupType);
 				} else if (ability === 'Torrent') {
-					rejectAbility = hasMove['hypervoice'];
+					rejectAbility = (hasMove['focusenergy'] || hasMove['hypervoice']);
 				} else if (ability === 'Tough Claws') {
 					rejectAbility = (hasType['Steel'] && !hasMove['fakeout']);
 				} else if (ability === 'Triage') {
@@ -1373,7 +1372,6 @@ export class RandomTeams {
 				if (hasAbility['Klutz'] && ability === 'Limber') ability = 'Klutz';
 				if (hasAbility['Magic Guard'] && ability !== 'Friend Guard' && ability !== 'Unaware') ability = 'Magic Guard';
 				if (hasAbility['Ripen']) ability = 'Ripen';
-				if (hasAbility['Sniper'] && hasMove['focusenergy']) ability = 'Sniper';
 				if (hasAbility['Stalwart']) ability = 'Stalwart';
 				if (hasAbility['Storm Drain']) ability = 'Storm Drain';
 				if (hasAbility['Telepathy'] && ability === 'Pressure') ability = 'Telepathy';
@@ -1840,7 +1838,9 @@ export class RandomTeams {
 
 		return pokemon;
 	}
-	
+
+	randomCAP1v1Sets: AnyObject = require('./cap-1v1-sets.json');
+
 	randomCAP1v1Team() {
 		const pokemon = [];
 		const pokemonPool = Object.keys(this.randomCAP1v1Sets);
