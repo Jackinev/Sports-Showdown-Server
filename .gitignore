@@ -15,7 +15,7 @@ package-lock.json
 databases/*.db*
 
 # Sports
-package.json
+!/config/emoticons.json
 
 # Typescript build artifacts
 .*-dist/

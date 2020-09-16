@@ -539,6 +539,7 @@ exports.grouplist = [
 		jurisdiction: 'u',
 		globalonly: true,
 		
+		promote: '&u',
 		roomowner: true,
 		roombot: true,
 		roommod: true,
