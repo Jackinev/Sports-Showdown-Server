@@ -229,6 +229,42 @@ export const commands: ChatCommands = {
 	sendhtmlpagehelp: [
 		`/sendhtmlpage: [target], [page id], [html] - sends the [target] a HTML room with the HTML [content] and the [pageid]. Requires: * # &`,
 	],
+
+	highlighthtmlpage(target, room, user) {
+		target = target.trim();
+		let [userid, pageid, title, highlight] = Utils.splitFirst(target, ',', 3);
+		pageid = `${user.id}-${toID(pageid)}`;
+		if (!userid || !pageid || !target) return this.parse(`/help highlighthtmlpage`);
+		const targetUser = Users.get(userid);
+		if (!targetUser || !targetUser.connected) {
+			throw new Chat.ErrorMessage(`User ${this.targetUsername} is not currently online.`);
+		}
+		if (targetUser.locked && !this.user.can('lock')) {
+			throw new Chat.ErrorMessage("This user is currently locked, so you cannot send them highlights.");
+		}
+
+		const buf = `|tempnotify|bot-${pageid}|${title} [from ${user.name}]|${highlight ? highlight : ''}`;
+		let targetConnections = [];
+		this.checkPMHTML(targetUser);
+		// try to locate connections that have requested the page recently
+		for (const c of targetUser.connections) {
+			if (c.lastRequestedPage === pageid) {
+				targetConnections.push(c);
+			}
+		}
+		// there are none, default to the first connection
+		if (!targetConnections.length) {
+			targetConnections = [targetUser.connections[0]];
+		}
+		for (const conn of targetConnections) {
+			conn.send(`>view-bot-${pageid}\n${buf}`);
+		}
+	},
+	highlighthtmlpagehelp: [
+		`/highlighthtmlpage [userid], [pageid], [title], [optional highlight] - Send a highlight to [userid] if they're viewing the bot page [pageid].`,
+		`If a [highlight] is specified, only highlights them if they have that term on their highlight list.`,
+	],
+
 	nick() {
 		this.sendReply(`||New to the Pokémon Showdown protocol? Your client needs to get a signed assertion from the login server and send /trn`);
 		this.sendReply(`||https://github.com/smogon/pokemon-showdown/blob/master/PROTOCOL.md#global-messages`);
@@ -294,6 +330,7 @@ export const commands: ChatCommands = {
 				}
 				if (requiresForce(patch)) return this.errorReply(requiresForceMessage);
 
+				const oldPlugins = Chat.plugins;
 				Chat.destroy();
 
 				const processManagers = ProcessManager.processManagers;
@@ -310,7 +347,7 @@ export const commands: ChatCommands = {
 				global.Tournaments = require('../tournaments').Tournaments;
 
 				this.sendReply("Chat commands have been hot-patched.");
-				Chat.loadPlugins();
+				Chat.loadPlugins(oldPlugins);
 				this.sendReply("Chat plugins have been loaded.");
 			} else if (target === 'tournaments') {
 				if (lock['tournaments']) {
@@ -337,7 +374,7 @@ export const commands: ChatCommands = {
 				// reload .sim-dist/dex.js
 				global.Dex = require('../../sim/dex').Dex;
 				// rebuild the formats list
-				delete Rooms.global.formatList;
+				Rooms.global.formatList = '';
 				// respawn validator processes
 				void TeamValidatorAsync.PM.respawn();
 				// respawn simulator processes
@@ -812,7 +849,7 @@ export const commands: ChatCommands = {
 		} catch (e) {
 			// failed while rebasing or popping the stash
 			await exec(`git reset --hard ${oldHash}`);
-			await exec(`git stash pop`);
+			if (stashedChanges) await exec(`git stash pop`);
 			this.sendReply(`FAILED, old changes restored.`);
 		}
 		if (!isPrivate) await rebuild();
@@ -922,7 +959,7 @@ export const commands: ChatCommands = {
 			cmd = target.toLowerCase();
 			target = '';
 		}
-		if (cmd.charAt(cmd.length - 1) === ',') cmd = cmd.slice(0, -1);
+		if (cmd.endsWith(',')) cmd = cmd.slice(0, -1);
 		const targets = target.split(',');
 		function getPlayer(input: string) {
 			const player = battle.playerTable[toID(input)];

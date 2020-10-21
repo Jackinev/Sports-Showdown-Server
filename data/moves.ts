@@ -2464,7 +2464,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {},
 		onHit(pokemon) {
 			const noCopycat = [
-				'assist', 'banefulbunker', 'beakblast', 'belch', 'bestow', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'craftyshield', 'destinybond', 'detect', 'dragontail', 'dynamaxcannon', 'endure', 'feint', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'obstruct', 'protect', 'ragepowder', 'roar', 'shelltrap', 'sketch', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
+				'assist', 'banefulbunker', 'beakblast', 'behemothbash', 'behemothblade', 'belch', 'bestow', 'celebrate', 'chatter', 'circlethrow', 'copycat', 'counter', 'covet', 'craftyshield', 'destinybond', 'detect', 'dragontail', 'dynamaxcannon', 'endure', 'feint', 'focuspunch', 'followme', 'helpinghand', 'holdhands', 'kingsshield', 'matblock', 'mefirst', 'metronome', 'mimic', 'mirrorcoat', 'mirrormove', 'naturepower', 'obstruct', 'protect', 'ragepowder', 'roar', 'shelltrap', 'sketch', 'sleeptalk', 'snatch', 'spikyshield', 'spotlight', 'struggle', 'switcheroo', 'thief', 'transform', 'trick', 'whirlwind',
 			];
 			let move: Move | ActiveMove | null = this.lastMove;
 			if (!move) return;
@@ -4783,18 +4783,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, nonsky: 1},
 		onPrepareHit(target, source, move) {
-			for (const action of this.queue) {
+			for (const action of this.queue.list as MoveAction[]) {
 				if (
-					// @ts-ignore
 					!action.move || !action.pokemon || !action.pokemon.isActive ||
-					// @ts-ignore
 					action.pokemon.fainted || action.maxMove || action.zmove
 				) {
 					continue;
 				}
-				// @ts-ignore
 				if (action.pokemon.side === source.side && ['grasspledge', 'waterpledge'].includes(action.move.id)) {
-					// @ts-ignore
 					this.queue.prioritizeAction(action, move);
 					this.add('-waiting', source, action.pokemon);
 					return null;
@@ -6048,7 +6044,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Befuddle",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Befuddle",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6076,7 +6073,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Cannonade",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Cannonade",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6115,7 +6113,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Centiferno",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Centiferno",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6137,7 +6136,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Chi Strike",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Chi Strike",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6178,7 +6178,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Cuddle",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Cuddle",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6200,7 +6201,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Depletion",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Depletion",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6212,7 +6214,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					if (move && !move.isZ && !move.isMax) {
 						const ppDeducted = pokemon.deductPP(move.id, 4);
 						if (ppDeducted) {
-							this.add("-activate", pokemon, 'move: Max Depletion', move.name, ppDeducted);
+							this.add("-activate", pokemon, 'move: G-Max Depletion', move.name, ppDeducted);
 							return;
 						}
 					}
@@ -6230,7 +6232,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 160,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Drum Solo",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Drum Solo",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6246,7 +6249,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Finale",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Finale",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6285,7 +6289,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Foam Burst",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Foam Burst",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6307,7 +6312,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Gold Rush",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Gold Rush",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6329,7 +6335,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Gravitas",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Gravitas",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6346,7 +6353,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 160,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Hydrosnipe",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Hydrosnipe",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6362,7 +6370,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Malodor",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Malodor",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6383,7 +6392,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Meltdown",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Meltdown",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6468,7 +6478,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Resonance",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Resonance",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6558,7 +6569,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Steelsurge",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Steelsurge",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6594,7 +6606,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Stonesurge",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Stonesurge",
 		pp: 5,
 		priority: 0,
 		flags: {},
@@ -6614,7 +6627,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Stun Shock",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Stun Shock",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6641,7 +6655,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Sweetness",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Sweetness",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6663,7 +6678,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Tartness",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Tartness",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6685,7 +6701,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Terror",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Terror",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6707,7 +6724,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Vine Lash",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Vine Lash",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6746,7 +6764,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Volcalith",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Volcalith",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6785,7 +6804,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Volt Crash",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Volt Crash",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6807,7 +6827,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Wildfire",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Wildfire",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6846,7 +6867,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
-		isNonstandard: "Gigantamax",		name: "G-Max Wind Rage",
+		isNonstandard: "Gigantamax",
+		name: "G-Max Wind Rage",
 		pp: 10,
 		priority: 0,
 		flags: {},
@@ -6945,18 +6967,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, nonsky: 1},
 		onPrepareHit(target, source, move) {
-			for (const action of this.queue) {
+			for (const action of this.queue.list as MoveAction[]) {
 				if (
-					// @ts-ignore
 					!action.move || !action.pokemon || !action.pokemon.isActive ||
-					// @ts-ignore
 					action.pokemon.fainted || action.maxMove || action.zmove
 				) {
 					continue;
 				}
-				// @ts-ignore
 				if (action.pokemon.side === source.side && ['waterpledge', 'firepledge'].includes(action.move.id)) {
-					// @ts-ignore
 					this.queue.prioritizeAction(action, move);
 					this.add('-waiting', source, action.pokemon);
 					return null;
@@ -7246,10 +7264,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onFaint(target, source, effect) {
 				if (!source || source.fainted || !effect) return;
 				if (effect.effectType === 'Move' && !effect.isFutureMove && source.lastMove) {
+					let move: Move = source.lastMove;
+					if (move.isMax && move.baseMove) move = this.dex.getMove(move.baseMove);
+
 					for (const moveSlot of source.moveSlots) {
-						if (moveSlot.id === source.lastMove.id) {
+						if (moveSlot.id === move.id) {
 							moveSlot.pp = 0;
-							this.add('-activate', source, 'move: Grudge', this.dex.getMove(source.lastMove.id).name);
+							this.add('-activate', source, 'move: Grudge', move.name);
 						}
 					}
 				}
@@ -8338,7 +8359,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, distance: 1},
 		onModifyMove(move, pokemon, target) {
-			switch (target.effectiveWeather()) {
+			switch (target?.effectiveWeather()) {
 			case 'raindance':
 			case 'primordialsea':
 				move.accuracy = true;
@@ -9056,11 +9077,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Jungle Healing",
 		pp: 10,
 		priority: 0,
-		flags: {distance: 1, heal: 1, authentic: 1, mystery: 1},
+		flags: {heal: 1, authentic: 1, mystery: 1},
 		onHit(pokemon) {
-			pokemon.cureStatus();
+			const success = !!this.heal(this.modify(pokemon.maxhp, 0.25));
+			return pokemon.cureStatus() || success;
 		},
-		heal: [1, 4],
 		secondary: null,
 		target: "allies",
 		type: "Grass",
@@ -12881,6 +12902,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const rand = this.random(10);
 			if (rand < 2) {
 				move.heal = [1, 4];
+				move.infiltrates = true;
 			} else if (rand < 6) {
 				move.basePower = 40;
 			} else if (rand < 9) {
@@ -14336,12 +14358,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
 		onTry(target, source, move) {
-			for (const action of this.queue) {
-				// @ts-ignore
+			for (const action of this.queue.list as MoveAction[]) {
 				if (!action.pokemon || !action.move || action.maxMove || action.zmove) continue;
-				// @ts-ignore
-				if (action.move?.id === 'round') {
-					// @ts-ignore
+				if (action.move.id === 'round') {
 					this.queue.prioritizeAction(action, move);
 					return;
 				}
@@ -14987,6 +15006,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onModifyMove(move, pokemon, target) {
+			if (!target) return;
 			const atk = pokemon.getStat('atk', false, true);
 			const spa = pokemon.getStat('spa', false, true);
 			const def = target.getStat('def', false, true);
@@ -16452,6 +16472,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Past",
 		name: "Spotlight",
 		pp: 15,
 		priority: 3,
@@ -17186,7 +17207,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Surging Strikes",
 		pp: 5,
 		priority: 0,
-		flags: {contact: 1, protect: 1},
+		flags: {contact: 1, protect: 1, punch: 1, mirror: 1},
 		willCrit: true,
 		multihit: 3,
 		secondary: null,
@@ -17943,7 +17964,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onModifyMove(move, pokemon, target) {
-			switch (target.effectiveWeather()) {
+			switch (target?.effectiveWeather()) {
 			case 'raindance':
 			case 'primordialsea':
 				move.accuracy = true;
@@ -19050,7 +19071,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Wicked Blow",
 		pp: 5,
 		priority: 0,
-		flags: {contact: 1, protect: 1},
+		flags: {contact: 1, protect: 1, punch: 1, mirror: 1},
 		willCrit: true,
 		secondary: null,
 		target: "normal",
