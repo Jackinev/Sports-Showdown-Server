@@ -97,7 +97,6 @@ export interface RoomSettings {
 	unoDisabled?: boolean;
 	blackjackDisabled?: boolean;
 	hangmanDisabled?: boolean;
-	toursEnabled?: '%' | boolean;
 	tourAnnouncements?: boolean;
 	gameNumber?: number;
 	highTraffic?: boolean;
@@ -112,6 +111,7 @@ export interface RoomSettings {
 	requestShowEnabled?: boolean | null;
 	showEnabled?: GroupSymbol | true;
 	permissions?: {[k: string]: GroupSymbol};
+	quotes?: {userid: string, quote: string, date: number}[];
 
 	scavSettings?: AnyObject;
 	scavQueue?: QueuedHunt[];

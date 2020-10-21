@@ -238,8 +238,8 @@ export const LogViewer = new class {
 			buf += `<br><strong>Max results reached, capped at ${limit}</strong>`;
 			buf += `<br><div style="text-align:center">`;
 			if (total < MAX_RESULTS) {
-				buf += `<button class="button" name="send" value="/sl ${search}|${roomid}|${month}|${limit + 100}">View 100 more<br />&#x25bc;</button>`;
-				buf += `<button class="button" name="send" value="/sl ${search}|${roomid}|${month}|all">View all<br />&#x25bc;</button></div>`;
+				buf += `<button class="button" name="send" value="/sl ${search},room:${roomid},date:${month},limit:${limit + 100}">View 100 more<br />&#x25bc;</button>`;
+				buf += `<button class="button" name="send" value="/sl ${search},room:${roomid},date:${month},limit:3000">View all<br />&#x25bc;</button></div>`;
 			}
 		}
 		buf += `</div>`;
@@ -306,7 +306,7 @@ export const LogViewer = new class {
 				return `<div class="notice">${message.slice(message.indexOf(',') + 1)}</div>`;
 			}
 			const group = name.charAt(0) !== ' ' ? `<small>${name.charAt(0)}</small>` : ``;
-			return `<div class="chat"><small>[${timestamp}] </small><strong>${group}${name.slice(1)}:</strong> <q>${Chat.formatText(message)}</q></div>`;
+			return `<div class="chat"><small>[${timestamp}] </small><strong>${group}${Utils.escapeHTML(name.slice(1))}:</strong> <q>${Chat.formatText(message)}</q></div>`;
 		}
 		case 'html': case 'raw': {
 			const [, html] = Utils.splitFirst(line, '|', 1);
@@ -547,6 +547,9 @@ export const LogSearcher = new class {
 			});
 			results = stdout.split('--');
 		} catch (e) {
+			if (e.message.includes('No such file or directory')) {
+				throw new Chat.ErrorMessage(`Logs for date '${month}' do not exist.`);
+			}
 			if (e.code !== 1 && !e.message.includes('stdout maxBuffer')) throw e; // 2 means an error in ripgrep
 			if (e.stdout) {
 				results = e.stdout.split('--');
@@ -563,7 +566,12 @@ export const LogSearcher = new class {
 		limit?: number | null,
 		date?: string | null
 	) {
-		if (date && date.length > 7) date = date?.substr(0, 7);
+		if (date) {
+			// if it's more than 7 chars, assume it's a month
+			if (date.length > 7) date = date.substr(0, 7);
+			// if it's less, assume they were trying a year
+			else if (date.length < 7) date = date.substr(0, 4);
+		}
 		const months = (date && toID(date) !== 'all' ? [date] : await new LogReaderRoom(roomid).listMonths()).reverse();
 		let count = 0;
 		let results: string[] = [];
@@ -621,8 +629,8 @@ export const LogSearcher = new class {
 		buf += sorted.filter(Boolean).join('<hr>');
 		if (limit) {
 			buf += `</details></blockquote><div class="pad"><hr><strong>Capped at ${limit}.</strong><br>`;
-			buf += `<button class="button" name="send" value="/sl ${search},${roomid},${limit + 200}">View 200 more<br />&#x25bc;</button>`;
-			buf += `<button class="button" name="send" value="/sl ${search},${roomid},all">View all<br />&#x25bc;</button></div>`;
+			buf += `<button class="button" name="send" value="/sl ${search},room:${roomid},limit:${limit + 200}">View 200 more<br />&#x25bc;</button>`;
+			buf += `<button class="button" name="send" value="/sl ${search},room:${roomid},limit:3000">View all<br />&#x25bc;</button></div>`;
 		}
 		return buf;
 	}
@@ -638,6 +646,7 @@ export const pages: PageTable = {
 		}
 		let [roomid, date, opts] = Utils.splitFirst(args.join('-'), '--', 2) as
 			[RoomID, string | undefined, string | undefined];
+		if (date) date = date.trim();
 		if (!roomid || roomid.startsWith('-')) {
 			this.title = '[Logs]';
 			return LogViewer.list(user, roomid?.slice(1));
@@ -655,9 +664,9 @@ export const pages: PageTable = {
 			if (!room.checkModjoin(user) && !user.can('bypassall')) {
 				return LogViewer.error("Access denied");
 			}
-			if (!user.can('lock') && !this.can('mute', null, room)) return;
+			if (!user.can('lock')) this.checkCan('mute', null, room);
 		} else {
-			if (!this.can('lock')) return;
+			this.checkCan('lock');
 		}
 
 		void accessLog.writeLine(`${user.id}: <${roomid}> ${date}`);
@@ -722,18 +731,19 @@ export const commands: ChatCommands = {
 	sl: 'searchlogs',
 	searchlog: 'searchlogs',
 	searchlogs(target, room) {
-		if (!room) return this.requiresRoom();
 		target = target.trim();
 		const args = target.split(',').map(item => item.trim());
 		if (!target) return this.parse('/help searchlogs');
 		let date = 'all';
 		const searches: string[] = [];
 		let limit = '500';
-		let tarRoom = room.roomid;
 		for (const arg of args) {
 			if (arg.startsWith('room:')) {
 				const id = arg.slice(5);
-				tarRoom = id as RoomID;
+				room = Rooms.search(id as RoomID) as Room | null;
+				if (!room) {
+					return this.errorReply(`Room "${id}" not found.`);
+				}
 			} else if (arg.startsWith('limit:')) {
 				limit = arg.slice(6);
 			} else if (arg.startsWith('date:')) {
@@ -742,9 +752,11 @@ export const commands: ChatCommands = {
 				searches.push(arg);
 			}
 		}
-		const curRoom = tarRoom ? Rooms.search(tarRoom) : room;
+		if (!room) {
+			return this.parse(`/help searchlogs`);
+		}
 		return this.parse(
-			`/join view-chatlog-${curRoom}--${date}--search-${Dashycode.encode(searches.join('+'))}--limit-${limit}`
+			`/join view-chatlog-${room.roomid}--${date}--search-${Dashycode.encode(searches.join('+'))}--limit-${limit}`
 		);
 	},
 	searchlogshelp() {

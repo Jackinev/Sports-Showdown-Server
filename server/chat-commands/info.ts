@@ -190,11 +190,11 @@ export const commands: ChatCommands = {
 		const gameRooms = [];
 		for (const curRoom of Rooms.rooms.values()) {
 			if (!curRoom.game) continue;
-			if ((targetUser.id in curRoom.game.playerTable && !targetUser.inRooms.has(curRoom.roomid)) ||
-				curRoom.auth.getDirect(targetUser.id) === Users.PLAYER_SYMBOL) {
-				if (curRoom.settings.isPrivate && !canViewAlts) {
-					continue;
-				}
+			const inPlayerTable = targetUser.id in curRoom.game.playerTable && !targetUser.inRooms.has(curRoom.roomid);
+			const hasPlayerSymbol = curRoom.auth.getDirect(targetUser.id) === Users.PLAYER_SYMBOL;
+			const canSeeRoom = canViewAlts || user === targetUser || !curRoom.settings.isPrivate;
+
+			if ((inPlayerTable || hasPlayerSymbol) && canSeeRoom) {
 				gameRooms.push(curRoom.roomid);
 			}
 		}
@@ -311,7 +311,7 @@ export const commands: ChatCommands = {
 
 	sbtl: 'sharedbattles',
 	sharedbattles(target, room) {
-		if (!this.can('lock')) return false;
+		this.checkCan('lock');
 
 		const [targetUsername1, targetUsername2] = target.split(',');
 		if (!targetUsername1 || !targetUsername2) return this.parse(`/help sharedbattles`);
@@ -342,7 +342,7 @@ export const commands: ChatCommands = {
 
 	sp: 'showpunishments',
 	showpunishments(target, room, user) {
-		if (!room) return this.requiresRoom();
+		room = this.requireRoom();
 		if (!room.persist) {
 			return this.errorReply("This command is unavailable in temporary rooms.");
 		}
@@ -352,14 +352,14 @@ export const commands: ChatCommands = {
 
 	sgp: 'showglobalpunishments',
 	showglobalpunishments(target, room, user) {
-		if (!this.can('lock')) return;
+		this.checkCan('lock');
 		return this.parse(`/join view-globalpunishments`);
 	},
 	showglobalpunishmentshelp: [`/showpunishments - Shows the current global punishments. Requires: % @ # &`],
 
 	host(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help host');
-		if (!this.can('ip')) return;
+		this.checkCan('ip');
 		target = target.trim();
 		if (!net.isIPv4(target)) return this.errorReply('You must pass a valid IPv4 IP to /host.');
 		void IPTools.lookup(target).then(({dnsbl, host, hostType}) => {
@@ -374,7 +374,7 @@ export const commands: ChatCommands = {
 	hostsearch: 'ipsearch',
 	ipsearch(target, room, user, connection, cmd) {
 		if (!target.trim()) return this.parse(`/help ipsearch`);
-		if (!this.can('rangeban')) return;
+		this.checkCan('rangeban');
 
 		let [ip, roomid] = this.splitOne(target);
 		const targetRoom = roomid ? Rooms.get(roomid) : null;
@@ -426,8 +426,8 @@ export const commands: ChatCommands = {
 	ipsearchhelp: [`/ipsearch [ip|range|host], (room) - Find all users with specified IP, IP range, or host. If a room is provided only users in the room will be shown. Requires: &`],
 
 	checkchallenges(target, room, user) {
-		if (!room) return this.requiresRoom();
-		if (!user.can('addhtml', null, room) && !this.can('ban', null, room)) return false;
+		room = this.requireRoom();
+		if (!user.can('addhtml', null, room)) this.checkCan('ban', null, room);
 		if (!this.runBroadcast(true)) return;
 		if (!this.broadcasting) {
 			this.errorReply(`This command must be broadcast:`);
@@ -1700,7 +1700,7 @@ export const commands: ChatCommands = {
 		if (RANDOMS_CALC_COMMANDS.includes(cmd) ||
 			(isRandomBattle && !DEFAULT_CALC_COMMANDS.includes(cmd) && !BATTLESPOT_CALC_COMMANDS.includes(cmd))) {
 			return this.sendReplyBox(
-				`Random Battles damage calculator. (Courtesy of Austin &amp; pre)<br />` +
+				`Random Battles damage calculator. (Courtesy of Austin)<br />` +
 				`- <a href="https://calc.pokemonshowdown.com/randoms.html">Random Battles Damage Calculator</a>`
 			);
 		}
@@ -1878,9 +1878,9 @@ export const commands: ChatCommands = {
 	},
 
 	roomhelp(target, room, user) {
-		if (!room) return this.requiresRoom();
-		if (!this.canBroadcast(false, '!htmlbox')) return;
-		if (this.broadcastMessage && !this.can('declare', null, room)) return false;
+		room = this.requireRoom();
+		this.checkBroadcast(false, '!htmlbox');
+		if (this.broadcastMessage) this.checkCan('declare', null, room);
 
 		if (!this.runBroadcast(false, '!htmlbox')) return;
 
@@ -1941,7 +1941,7 @@ export const commands: ChatCommands = {
 	},
 
 	restarthelp(target, room, user) {
-		if (!Rooms.global.lockdown && !this.can('lockdown')) return false;
+		if (!Rooms.global.lockdown) this.checkCan('lockdown');
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
 			`The server is restarting. Things to know:<br />` +
@@ -1966,7 +1966,7 @@ export const commands: ChatCommands = {
 		if (!room) {
 			return this.errorReply(`This is not a room you can set the rules of.`);
 		}
-		if (!this.can('editroom', null, room)) return;
+		this.checkCan('editroom', null, room);
 		if (target.length > 150) {
 			return this.errorReply(`Error: Room rules link is too long (must be under 150 characters). You can use a URL shortener to shorten the link.`);
 		}
@@ -1995,7 +1995,7 @@ export const commands: ChatCommands = {
 
 	faq(target, room, user) {
 		if (!this.runBroadcast()) return;
-		target = target.toLowerCase().trim();
+		target = toID(target);
 		const showAll = target === 'all';
 		if (showAll && this.broadcasting) {
 			return this.sendReplyBox(this.tr`You cannot broadcast all FAQs at once.`);
@@ -2023,7 +2023,11 @@ export const commands: ChatCommands = {
 		if (showAll || ['tournaments', 'tournament', 'tours', 'tour'].includes(target)) {
 			buffer.push(this.tr`To join a room tournament, click the <strong>Join!</strong> button or type the command <code>/tour join</code> in the room's chat. You can check if your team is legal for the tournament by clicking the <strong>Validate</strong> button once you've joined and selected a team. To battle your opponent in the tournament, click the <strong>Ready!</strong> button when it appears. There are two different types of room tournaments: elimination (if a user loses more than a certain number of times, they are eliminated) and round robin (all users play against each other, and the user with the most wins is the winner).`);
 		}
-		if (showAll || !buffer.length) {
+		if (!buffer.length && target) {
+			this.errorReply(`'${target}' is an invalid FAQ.`);
+			return this.parse(`/help faq`);
+		}
+		if (showAll) {
 			buffer.unshift(`<a href="https://pokemonshowdown.com/pages/faq">${this.tr`Frequently Asked Questions`}</a>`);
 		}
 		this.sendReplyBox(buffer.join(`<br />`));
@@ -2434,8 +2438,8 @@ export const commands: ChatCommands = {
 	},
 
 	async requestshow(target, room, user) {
-		if (!room) return this.requiresRoom();
-		if (!this.canTalk()) return false;
+		room = this.requireRoom();
+		this.checkChat();
 		if (!room.settings.requestShowEnabled) {
 			return this.errorReply(`Media approvals are disabled in this room.`);
 		}
@@ -2474,8 +2478,8 @@ export const commands: ChatCommands = {
 	requestshowhelp: [`/requestshow [link], [comment] - Requests permission to show media in the room.`],
 
 	async approveshow(target, room, user) {
-		if (!room) return this.requiresRoom();
-		if (!this.can('mute', null, room)) return false;
+		room = this.requireRoom();
+		this.checkCan('mute', null, room);
 		if (!room.settings.requestShowEnabled) {
 			return this.errorReply(`Media approvals are disabled in this room.`);
 		}
@@ -2512,8 +2516,8 @@ export const commands: ChatCommands = {
 	approveshowhelp: [`/approveshow [user] - Approves the media display request of [user]. Requires: % @ # &`],
 
 	denyshow(target, room, user) {
-		if (!room) return this.requiresRoom();
-		if (!this.can('mute', null, room)) return false;
+		room = this.requireRoom();
+		this.checkCan('mute', null, room);
 		if (!room.settings.requestShowEnabled) {
 			return this.errorReply(`Media approvals are disabled in this room.`);
 		}
@@ -2530,13 +2534,91 @@ export const commands: ChatCommands = {
 	},
 	denyshowhelp: [`/denyshow [user] - Denies the media display request of [user]. Requires: % @ # &`],
 
+	randquote(target, room, user) {
+		room = this.requireRoom();
+		if (!room.settings.quotes?.length) return this.errorReply(`This room has no quotes.`);
+		this.runBroadcast();
+		const {quote, date, userid} = room.settings.quotes[Math.floor(Math.random() * room.settings.quotes.length)];
+		const time = Chat.toTimestamp(new Date(date), {human: true});
+		const attribution = toID(target) === 'showauthor' ? `<br /><hr /><small>Added by ${userid} on ${time}</small>` : '';
+		return this.sendReplyBox(`${Chat.formatText(quote).replace(/\n/g, '<br />')}${attribution}`);
+	},
+	randquotehelp: [`/randquote [showauthor] - Show a random quote from the room. Add 'showauthor' to see who added it and when.`],
+
+	addquote: 'quote',
+	quote(target, room, user) {
+		room = this.requireRoom();
+		if (!room.persist) {
+			return this.errorReply("This command is unavailable in temporary rooms.");
+		}
+		target = target.trim();
+		this.checkCan('mute', null, room);
+		if (!target) {
+			return this.parse(`/help quote`);
+		}
+		if (!room.settings.quotes) room.settings.quotes = [];
+		if (this.filter(target) !== target) {
+			return this.errorReply(`Invalid quote.`);
+		}
+		if (room.settings.quotes.filter(item => item.quote === target).length) {
+			return this.errorReply(`"${target}" is already quoted in this room.`);
+		}
+		if (target.length > 8192) {
+			return this.errorReply(`Your quote cannot exceed 8192 characters.`);
+		}
+		if (room.settings.quotes.length >= 100) {
+			return this.errorReply(`This room already has 100 quotes, which is the maximum.`);
+		}
+		room.settings.quotes.push({userid: user.id, quote: target, date: Date.now()});
+		room.saveSettings();
+		const collapsedQuote = target.replace(/\n/g, ' ');
+		this.privateModAction(`${user.name} added a new quote: "${collapsedQuote}".`);
+		return this.modlog(`ADDQUOTE`, null, collapsedQuote);
+	},
+	quotehelp: [`/quote [quote] - Adds [quote] to the room's quotes. Requires: % @ # &`],
+
+	removequote(target, room, user) {
+		target = target.trim();
+		const [idx, roomid] = Utils.splitFirst(target, ',');
+		const targetRoom = roomid ? Rooms.search(roomid) : room;
+		if (!targetRoom) return this.errorReply(`Invalid room.`);
+		if (!targetRoom.persist) {
+			return this.errorReply("This command is unavailable in temporary rooms.");
+		}
+		this.room = targetRoom;
+		this.checkCan('mute', null, targetRoom);
+		if (!targetRoom.settings.quotes?.length) return this.errorReply(`This room has no quotes.`);
+		const index = parseInt(idx);
+		if (isNaN(index)) {
+			return this.errorReply(`Invalid index.`);
+		}
+		if (!targetRoom.settings.quotes[index - 1]) {
+			return this.errorReply(`Quote not found.`);
+		}
+		const [removed] = targetRoom.settings.quotes.splice(index - 1, 1);
+		const collapsedQuote = target.replace(/\n/g, ' ');
+		this.privateModAction(`${user.name} removed quote indexed at ${index}: "${collapsedQuote}" (originally added by ${removed.userid}).`);
+		this.modlog(`REMOVEQUOTE`, null, collapsedQuote);
+		targetRoom.saveSettings();
+		if (roomid) this.parse(`/join view-quotes-${targetRoom.roomid}`);
+	},
+	removequotehelp: [`/removequote [index] - Removes the quote from the room's quotes. Requires: % @ # &`],
+
+	viewquotes: 'quotes',
+	quotes(target, room) {
+		const targetRoom = target ? Rooms.search(target) : room;
+		if (!targetRoom) return this.errorReply(`Invalid room.`);
+		return this.parse(`/join view-quotes-${targetRoom.roomid}`);
+	},
+	quoteshelp: [`/quotes [room] - Shows all quotes for [room]. Defaults the room the command is used in.`],
+
 	approvallog(target, room, user) {
-		if (!room) return this.requiresRoom();
+		room = this.requireRoom();
 		return this.parse(`/sl approved showing media from, ${room.roomid}`);
 	},
 
 	viewapprovals(target, room, user) {
-		if (!room) return this.requiresRoom();
+		room = this.requireRoom();
 		return this.parse(`/join view-approvals-${room.roomid}`);
 	},
 
@@ -2562,7 +2644,7 @@ export const commands: ChatCommands = {
 		}
 		if (comment) buf += Utils.html`<br>(${comment.trim()})</div>`;
 
-		if (!this.canBroadcast()) return false;
+		this.checkBroadcast();
 		if (this.broadcastMessage) {
 			const minGroup = room ? (room.settings.showEnabled || '#') : '+';
 			const auth = room?.auth || Users.globalAuth;
@@ -2596,10 +2678,10 @@ export const commands: ChatCommands = {
 		if (!target) return this.parse('/help code');
 		if (target.length >= 8192) return this.errorReply("Your code must be under 8192 characters long!");
 		if (target.length < 80 && !target.includes('\n') && !target.includes('```') && this.shouldBroadcast()) {
-			return this.canTalk(`\`\`\`${target}\`\`\``);
+			return this.checkChat(`\`\`\`${target}\`\`\``);
 		}
 
-		if (!this.canBroadcast(true, '!code')) return;
+		this.checkBroadcast(true, '!code');
 
 		const code = Chat.getReadmoreCodeBlock(target);
 		this.runBroadcast(true);
@@ -2663,7 +2745,7 @@ export const pages: PageTable = {
 		let buf = "";
 		if (!user.named) return Rooms.RETRY_AFTER_LOGIN;
 		if (!room.persist) return;
-		if (!this.can('mute', null, room)) return;
+		this.checkCan('mute', null, room);
 		// Ascending order
 		const sortedPunishments = Array.from(Punishments.getPunishments(room.roomid))
 			.sort((a, b) => a[1].expireTime - b[1].expireTime);
@@ -2678,7 +2760,7 @@ export const pages: PageTable = {
 		this.title = 'Global Punishments';
 		let buf = "";
 		if (!user.named) return Rooms.RETRY_AFTER_LOGIN;
-		if (!this.can('lock')) return;
+		this.checkCan('lock');
 		// Ascending order
 		const sortedPunishments = Array.from(Punishments.getPunishments()).sort((a, b) => a[1].expireTime - b[1].expireTime);
 		const sP = new Map();
@@ -2690,7 +2772,7 @@ export const pages: PageTable = {
 	},
 	approvals(args) {
 		const room = Rooms.get(args[0]) as ChatRoom | GameRoom;
-		if (!this.can('mute', null, room)) return;
+		this.checkCan('mute', null, room);
 		if (!room.pendingApprovals) room.pendingApprovals = new Map();
 		if (room.pendingApprovals.size < 1) return `<h2>No pending approvals on ${room.title}</h2>`;
 		let buf = `<div class="pad"><strong>Pending media requests on ${room.title}</strong><hr />`;
@@ -2703,11 +2785,39 @@ export const pages: PageTable = {
 		}
 		return buf;
 	},
+	quotes(args, user) {
+		const room = this.requireRoom();
+		this.title = `[Quotes]`;
+		// allow it for users if they can access the room
+		if (!user.inRooms.has(room.roomid) && room.settings.isPrivate && !user.isStaff) {
+			return this.errorReply(`Access denied.`);
+		}
+		let buffer = `<div class="pad">`;
+		buffer += `<button style="float:right;" class="button" name="send" value="/join view-quotes-${room.roomid}"><i class="fa fa-refresh"></i> Refresh</button>`;
+		if (!room.settings.quotes?.length) {
+			return `${buffer}<h2>This room has no quotes.</h2></div>`;
+		}
+
+		buffer += `<h2>Quotes for ${room.title} (${room.settings.quotes.length}):</h2>`;
+		for (const [i, quoteObj] of room.settings.quotes.entries()) {
+			const index = i + 1;
+			const {quote, userid, date} = quoteObj;
+			buffer += `<div class="infobox">${index}: ${Chat.formatText(quote).replace(/\n/g, '<br />')}`;
+			buffer += `<br /><hr /><small>Added by ${userid} on ${Chat.toTimestamp(new Date(date), {human: true})}</small>`;
+			if (user.can('mute', null, room)) {
+				buffer += `<br /><hr /><button class="button" name="send" value="/removequote ${index},${room.roomid}">Remove</button>`;
+			}
+			buffer += `</div>`;
+		}
+		buffer += `</div>`;
+		return buffer;
+	},
 };
 
 process.nextTick(() => {
 	Dex.includeData();
 	Chat.multiLinePattern.register(
-		'/htmlbox', '!htmlbox', '/addhtmlbox', '/addrankhtmlbox', '/adduhtml', '/changeuhtml', '/addrankuhtmlbox', '/changerankuhtmlbox'
+		'/htmlbox', '/quote', '/addquote', '!htmlbox', '/addhtmlbox', '/addrankhtmlbox', '/adduhtml',
+		'/changeuhtml', '/addrankuhtmlbox', '/changerankuhtmlbox'
 	);
 });

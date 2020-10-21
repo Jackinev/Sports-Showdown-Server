@@ -86,7 +86,7 @@ export const Scripts: BattleScriptsData = {
 
 		// Dancer Petal Dance hack
 		// TODO: implement properly
-		const noLock = externalMove && !pokemon.volatiles.lockedmove;
+		const noLock = externalMove && !pokemon.volatiles['lockedmove'];
 
 		if (zMove) {
 			if (pokemon.illusion) {
@@ -127,7 +127,7 @@ export const Scripts: BattleScriptsData = {
 				this.runMove(move.id, dancer, this.getTargetLoc(dancersTarget, dancer), this.dex.getAbility('dancer'), undefined, true);
 			}
 		}
-		if (noLock && pokemon.volatiles.lockedmove) delete pokemon.volatiles.lockedmove;
+		if (noLock && pokemon.volatiles['lockedmove']) delete pokemon.volatiles['lockedmove'];
 	},
 	/**
 	 * useMove is the "inside" move caller. It handles effects of the
@@ -815,10 +815,7 @@ export const Scripts: BattleScriptsData = {
 		damage = this.spreadDamage(damage, targets, pokemon, move);
 
 		for (const i of targets.keys()) {
-			if (!damage && damage !== 0) {
-				this.debug('damage interrupted');
-				targets[i] = false;
-			}
+			if (damage[i] === false) targets[i] = false;
 		}
 
 		// 3. onHit event happens here
