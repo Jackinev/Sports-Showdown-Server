@@ -1385,6 +1385,13 @@ export const Chat = new class {
 		});
 	}
 	translationsLoaded = false;
+	/**
+	 * As per the node.js documentation at https://nodejs.org/api/timers.html#timers_settimeout_callback_delay_args,
+	 * timers with durations that are too long for a 32-bit signed integer will be invoked after 1 millisecond,
+	 * which tends to cause unexpected behavior.
+	 */
+	readonly MAX_TIMEOUT_DURATION = 2147483647;
+
 	readonly multiLinePattern = new PatternTester();
 
 	/*********************************************************
@@ -1910,7 +1917,7 @@ export const Chat = new class {
 		const roundingBoundaries = [6, 15, 12, 30, 30];
 		const unitNames = ["second", "minute", "hour", "day", "month", "year"];
 		const positiveIndex = parts.findIndex(elem => elem > 0);
-		const precision = (options?.precision ? options.precision : 3);
+		let precision = (options?.precision ? options.precision : 3);
 		if (options?.hhmmss) {
 			const str = parts.slice(positiveIndex).map(value => value < 10 ? "0" + value : "" + value).join(":");
 			return str.length === 2 ? "00:" + str : str;
@@ -1922,6 +1929,14 @@ export const Chat = new class {
 				parts[positiveIndex + precision - 1]++;
 			}
 		}
+
+		// don't display trailing 0's if the number is exact
+		let precisionIndex = 5;
+		while (precisionIndex > positiveIndex && !parts[precisionIndex]) {
+			precisionIndex--;
+		}
+		precision = Math.min(precision, precisionIndex - positiveIndex + 1);
+
 		return parts
 			.slice(positiveIndex)
 			.reverse()
