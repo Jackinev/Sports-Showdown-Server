@@ -1,6 +1,6 @@
 'use strict';
 
-exports.commands = {
+export const commands: ChatCommands = {
 	
 	sportstiers(target, room, user, connection) {
 		return connection.popup(`**Galar Dex Draft**:
@@ -119,6 +119,38 @@ Hikertoad (Hikertoad#0648)
 NarthVader (Narth#1623)
 PerfecteBlu (Blu#9129)
 st. ihiihuio ♫ (Saint#0007)`);
+	},
+	
+	sportspartners(target, room, user, connection) {
+		let reply = 
+			`<b><u>Sports Partners:</u></b><br><br>` +
+			`<table style="text-align: center; line-height: 1.5; width: 100%; border-collapse: collapse">` +
+				`<tr style="border: 1px solid black; background: rgba(0 , 0 , 0 , 0.2)">` + 
+					`<td style="width: 50%; padding: 10px;"><img src="https://i.imgur.com/pUDYSMe.png" width="120" height="120" /></td>` + 
+					`<td>` + 
+						`<span style="font-size: 16px;"><b>DGBA</b></span><br>` + 
+						`Owner(s): <button style="color: blue; text-decoration: underline; border: none; background: none; padding: 0; height: -20em; font-family: verdana, sans-serif; font-size: 12px; cursor: pointer" name="parseCommand" value="/user CRU Jack">Jack</button>, <button style="color: blue; text-decoration: underline; border: none; background: none; padding: 0; height: -20em; font-family: verdana, sans-serif; font-size: 12px; cursor: pointer" name="parseCommand" value="/user Bontz">Haz</button><br><br>` + 
+						`| <a href="DGBA">Chatroom</a> | <a href="https://discord.gg/7N9nhtacpS">Discord</a> |` + 
+					`</td>` + 
+				`</tr>` + 
+				`<tr style="border: 1px solid black; background: rgba(0 , 0 , 0 , 0.1)">` + 
+					`<td style="width: 50%; padding: 10px;"><img src="https://i.imgur.com/z6GPTw6.png" width="138" height="120" /></td>` + 
+					`<td>` + 
+						`<span style="font-size: 16px;"><b>DPL</b></span><br>` + 
+						`Owner(s): <button style="color: blue; text-decoration: underline; border: none; background: none; padding: 0; height: -20em; font-family: verdana, sans-serif; font-size: 12px; cursor: pointer" name="parseCommand" value="/user King L5">King L5</button>, <button style="color: blue; text-decoration: underline; border: none; background: none; padding: 0; height: -20em; font-family: verdana, sans-serif; font-size: 12px; cursor: pointer" name="parseCommand" value="/user PerfecteBlu">Blu</button><br><br>` + 
+						`| <a href="DPL">Chatroom</a> | <a href="https://discord.gg/zVQZgaMksw">Discord</a> |` + 
+					`</td>` + 
+				`</tr>` + 
+				`<tr style="border: 1px solid black; background: rgba(0 , 0 , 0 , 0.2)">` + 
+					`<td style="width: 50%; padding: 10px;"><img src="https://i.imgur.com/D6N6RnX.png" width="120" height="120" /></td>` + 
+					`<td>` + 
+						`<span style="font-size: 16px;"><b>OLT</b></span><br>` + 
+						`Owner(s): <button style="color: blue; text-decoration: underline; border: none; background: none; padding: 0; height: -20em; font-family: verdana, sans-serif; font-size: 12px; cursor: pointer" name="parseCommand" value="/user st. ihiihuio">Saint</button><br><br>` + 
+						`| <a href="OLT">Chatroom</a> |` + 
+					`</td>` + 
+				`</tr>` + 
+			`</table>`;
+		return this.sendReply(`|raw|<div class="infobox infobox-limited">${reply}</div>`);
 	},
 	
 };
