@@ -13238,7 +13238,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 90,
 		basePower: 140,
 		category: "Special",
-		isNonstandard: "Past",
+		isNonstandard: "PastMove",
 		name: "Psycho Boost",
 		pp: 5,
 		priority: 0,

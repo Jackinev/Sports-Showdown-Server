@@ -365,7 +365,7 @@ export const commands: ChatCommands = {
 			PUBL: 30,
 			PU: 40,
 			NFE: 40,
-			LC: 50,
+			LC: 40,
 		};
 		let tier = species.tier;
 		if (tier[0] === '(') tier = tier.slice(1, -1);
