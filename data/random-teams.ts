@@ -1073,6 +1073,9 @@ export class RandomTeams {
 			const stabs = counter[species.types[0]] + (counter[species.types[1]] || 0);
 			if (!hasType[move.type] || stabs > 1 || counter[move.category] < 2) return {cull: true};
 		}
+		
+		// Reject move if banned by the format
+		if (this.format.randomBanlist && this.format.randomBanlist.includes(move.id)) return {cull: true};
 
 		return {cull: false};
 	}
@@ -1221,7 +1224,7 @@ export class RandomTeams {
 		case 'Unaware':
 			return (counter.setupType || hasMove['fireblast']);
 		case 'Unburden':
-			return (hasAbility['Prankster'] || !counter.setupType && !isDoubles);
+			return (this.format.forceItem || hasAbility['Prankster'] || !counter.setupType && !isDoubles && !hasMove['acrobatics']);
 		case 'Volt Absorb':
 			return (this.dex.getEffectiveness('Electric', species) < -1);
 		case 'Water Absorb':
@@ -1272,7 +1275,7 @@ export class RandomTeams {
 		if (hasMove['bellydrum'] && hasMove['substitute']) return 'Salac Berry';
 
 		// Misc item generation logic
-		if (species.evos.length && !hasMove['uturn']) return 'Eviolite';
+		if (!this.format.allowUnevolved && species.evos.length) return (ability === 'Technician' && counter.Physical >= 4) ? 'Choice Band' : 'Eviolite';
 
 		// Ability based logic and miscellaneous logic
 		if (species.name === 'Wobbuffet' || ['Cheek Pouch', 'Harvest', 'Ripen'].includes(ability)) return 'Sitrus Berry';
@@ -1710,8 +1713,47 @@ export class RandomTeams {
 		if (species.baseSpecies === 'Pikachu') {
 			forme = 'Pikachu' + this.sample(['', '-Original', '-Hoenn', '-Sinnoh', '-Unova', '-Kalos', '-Alola', '-Partner', '-World']);
 		}
+		
+		// forceItem
+		if (this.format.forceItem) item = this.sample(this.format.forceItem);
 
-		const level: number = (isDoubles ? species.randomDoubleBattleLevel : species.randomBattleLevel) || 80;
+		let level: number;
+
+		if (!isDoubles) {
+			if (species.randomBattleLevel) level = species.randomBattleLevel;
+			else {
+				const levelScale: {[tier: string]: number} = {
+					uber: 72, ou: 80, uu: 82, ru: 84, nu: 86, pu: 88,
+				};
+				const customScale: {[species: string]: number} = {
+					Glalie: 72, 'Darmanitan-Galar-Zen': 80, Wobbuffet: 80, Zygarde: 80,
+					Delibird: 100, Shedinja: 100,
+				};
+				let tier = toID((species.isGigantamax ? this.dex.getSpecies(species.baseSpecies) : species).tier).replace('bl', '');
+				// For future DLC Pokemon
+				if (tier === 'illegal') {
+					tier = toID(this.dex.mod('gen7').getSpecies(species.name).tier);
+					switch (tier) {
+					case 'uubl': case 'uu':
+						tier = 'ou';
+						break;
+					case 'rubl': case 'ru':
+						tier = 'uu';
+						break;
+					case 'nubl': case 'nu': case 'publ': case 'pu':
+						tier = 'ru';
+						break;
+					}
+				}
+				level = levelScale[tier] || (species.nfe ? 90 : 80);
+				if (customScale[species.name]) level = customScale[species.name];
+			}
+		} else level = species.randomDoubleBattleLevel || 80;
+		
+		// level100
+		if (this.format.level100) {
+			level = 100;
+		}
 
 		// Prepare optimal HP
 		const srImmunity = ability === 'Magic Guard' || item === 'Heavy-Duty Boots';
@@ -1771,11 +1813,18 @@ export class RandomTeams {
 	}
 
 	getPokemonPool(type: string, pokemonToExclude: RandomTeamsTypes.RandomSet[] = [], isMonotype = false) {
+		const allowedNFE = ['Chansey', 'Doublade', 'Gligar', 'Pikachu', 'Porygon2', 'Scyther', 'Type: Null'];
 		const exclude = pokemonToExclude.map(p => toID(p.species));
 		const pokemonPool = [];
 		for (const id in this.dex.data.FormatsData) {
 			let species = this.dex.getSpecies(id);
 			if (species.gen > this.gen || exclude.includes(species.id)) continue;
+			if (!species.randomBattleMoves) continue;
+			// Remove banned Pokemon
+			if (this.format.randomBanlist && this.format.randomBanlist.includes(species.name)) continue;
+			if (this.format.randomBanlist && this.format.randomBanlist.includes(species.baseSpecies)) continue;
+			// Remove unevolved Pokemon, unless they're specifically allowed by the format
+			if (!this.format.allowUnevolved && (species.nfe || species.name === 'Meltan') && (this.format.forceItem || !allowedNFE.includes(species.name))) continue;
 			if (isMonotype) {
 				if (!species.types.includes(type)) continue;
 				if (typeof species.battleOnly === 'string') {
