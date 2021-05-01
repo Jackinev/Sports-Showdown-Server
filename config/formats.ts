@@ -251,6 +251,195 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 	
 	
 	
+	// Multi Draft Tiers
+	///////////////////////////////////////////////////////////////////
+	{
+		section: "Multi Draft Tiers",
+		column: 2,
+	},
+	{
+		name: "[Gen 8] Galar Dex Multi Draft",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] Galar Dex Multi Dynamax",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview'],
+	},
+	{
+		name: "[Gen 8] National Dex Multi Draft",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex Multi Legacy",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+PastMove', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex Multi Dynamax",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
+	},
+	{
+		name: "[Gen 8] National Dex DLC Multi Draft",
+
+		mod: 'gen8leaks',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex DLC Multi Dynamax",
+
+		mod: 'gen8leaks',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
+	},
+	{
+		name: "[Gen 8] National Dex DLC Multi Legacy",
+
+		mod: 'gen8leaks',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+PastMove', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex Multi Unrestricted",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		tournamentShow: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Draft', '+Unreleased', '-Nonexistent', 'Obtainable Formes', 'Obtainable Misc', '+CAP', '+Past', '+PastMove', 'Team Preview'],
+	},
+	
+	
+	
+	// FFA Draft Tiers
+	///////////////////////////////////////////////////////////////////
+	{
+		section: "FFA Draft Tiers",
+		column: 2,
+	},
+	{
+		name: "[Gen 8] Galar Dex FFA Draft",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] Galar Dex FFA Dynamax",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview'],
+	},
+	{
+		name: "[Gen 8] National Dex FFA Draft",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex FFA Legacy",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+PastMove', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex FFA Dynamax",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
+	},
+	{
+		name: "[Gen 8] National Dex DLC FFA Draft",
+
+		mod: 'gen8leaks',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex DLC FFA Dynamax",
+
+		mod: 'gen8leaks',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
+	},
+	{
+		name: "[Gen 8] National Dex DLC FFA Legacy",
+
+		mod: 'gen8leaks',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+PastMove', 'Team Preview', 'Dynamax Clause'],
+	},
+	{
+		name: "[Gen 8] National Dex FFA Unrestricted",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		ruleset: ['Draft', '+Unreleased', '-Nonexistent', 'Obtainable Formes', 'Obtainable Misc', '+CAP', '+Past', '+PastMove', 'Team Preview'],
+	},
+	
+	
+	
 	// Past Gens Draft League
 	///////////////////////////////////////////////////////////////////
 	{
@@ -308,7 +497,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 	{
 		section: "Other Metagames",
-		column: 2,
+		column: 3,
 	},
 	{
         name: "[Gen 8] (National Dex) Astrea Cup",
@@ -991,6 +1180,30 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['[Gen 8] Random Battle'],
 	},
 	{
+		name: "[Gen 8] Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'random',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Obtainable', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
+		name: "[Gen 8] Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'random',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		teamLength: {
+			battle: 3,
+		},
+		ruleset: ['Obtainable', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
 		name: "[Gen 8] Random Camomons",
 		desc: `Pok&eacute;mon change type to match their first two moves.`,
 
@@ -1345,6 +1558,16 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 			}
 		},
 	},
+	
+	
+	
+	// Other Randomized Metas
+	///////////////////////////////////////////////////////////////////
+
+	{
+		section: "Other Randomized Metas",
+		column: 4,
+	},
 	{
 		name: "[Gen 8] Random Doubles Battle",
 
@@ -1399,6 +1622,121 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		searchShow: false,
 		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
 	},
+	{
+		name: "[Gen 7] Random Battle",
+		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3591157/">Sets and Suggestions</a>`,
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3616946/">Role Compendium</a>`,
+		],
+
+		mod: 'gen7',
+		team: 'random',
+		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
+		name: "[Gen 7] Random Doubles Battle",
+		threads: [`&bullet; <a href="https://www.smogon.com/forums/threads/3601525/">Sets and Suggestions</a>`],
+
+		mod: 'gen7',
+		gameType: 'doubles',
+		team: 'random',
+		searchShow: false,
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
+		name: "[Gen 7] Battle Factory",
+		desc: `Randomized teams of Pok&eacute;mon for a generated Smogon tier with sets that are competitively viable.`,
+
+		mod: 'gen7',
+		team: 'randomFactory',
+		searchShow: false,
+		ruleset: ['Obtainable', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
+	},
+	{
+		name: "[Gen 7] BSS Factory",
+		desc: `Randomized 3v3 Singles featuring Pok&eacute;mon and movesets popular in Battle Spot Singles.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3604845/">Information and Suggestions Thread</a>`,
+		],
+
+		mod: 'gen7',
+		team: 'randomBSSFactory',
+		searchShow: false,
+		teamLength: {
+			validate: [3, 6],
+			battle: 3,
+		},
+		ruleset: ['Standard GBU'],
+	},
+	{
+		name: "[Gen 7 Let's Go] Random Battle",
+
+		mod: 'letsgo',
+		team: 'random',
+		searchShow: false,
+		ruleset: ['Obtainable', 'Allow AVs', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
+		name: "[Gen 6] Random Battle",
+
+		mod: 'gen6',
+		team: 'random',
+		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
+		name: "[Gen 6] Battle Factory",
+		desc: `Randomized teams of Pok&eacute;mon for a generated Smogon tier with sets that are competitively viable.`,
+
+		mod: 'gen6',
+		team: 'randomFactory',
+		searchShow: false,
+		ruleset: ['Obtainable', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
+	},
+	{
+		name: "[Gen 5] Random Battle",
+
+		mod: 'gen5',
+		team: 'random',
+		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
+		name: "[Gen 4] Random Battle",
+
+		mod: 'gen4',
+		team: 'random',
+		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
+	},
+	{
+		name: "[Gen 3] Random Battle",
+
+		mod: 'gen3',
+		team: 'random',
+		ruleset: ['Standard'],
+	},
+	{
+		name: "[Gen 2] Random Battle",
+
+		mod: 'gen2',
+		team: 'random',
+		ruleset: ['Standard'],
+	},
+	{
+		name: "[Gen 1] Random Battle",
+
+		mod: 'gen1',
+		team: 'random',
+		ruleset: ['Standard'],
+	},
+	{
+		name: "[Gen 1] Challenge Cup",
+
+		mod: 'gen1',
+		team: 'randomCC',
+		searchShow: false,
+		challengeShow: false,
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod'],
+	},
 	
 	
 	
@@ -1407,7 +1745,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 	{
 		section: "Other Other Metagames",
-		column: 3,
+		column: 4,
 	},
 	{
 		name: "[Gen 8] Rock Paper Scissors",
@@ -1559,131 +1897,6 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 				return false;
 			}
 		},
-	},
-	
-	
-	
-	// Past Randomized Metas
-	///////////////////////////////////////////////////////////////////
-
-	{
-		section: "Past Randomized Metas",
-		column: 4,
-	},
-	{
-		name: "[Gen 7] Random Battle",
-		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3591157/">Sets and Suggestions</a>`,
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3616946/">Role Compendium</a>`,
-		],
-
-		mod: 'gen7',
-		team: 'random',
-		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 7] Random Doubles Battle",
-		threads: [`&bullet; <a href="https://www.smogon.com/forums/threads/3601525/">Sets and Suggestions</a>`],
-
-		mod: 'gen7',
-		gameType: 'doubles',
-		team: 'random',
-		searchShow: false,
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 7] Battle Factory",
-		desc: `Randomized teams of Pok&eacute;mon for a generated Smogon tier with sets that are competitively viable.`,
-
-		mod: 'gen7',
-		team: 'randomFactory',
-		searchShow: false,
-		ruleset: ['Obtainable', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
-	},
-	{
-		name: "[Gen 7] BSS Factory",
-		desc: `Randomized 3v3 Singles featuring Pok&eacute;mon and movesets popular in Battle Spot Singles.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3604845/">Information and Suggestions Thread</a>`,
-		],
-
-		mod: 'gen7',
-		team: 'randomBSSFactory',
-		searchShow: false,
-		teamLength: {
-			validate: [3, 6],
-			battle: 3,
-		},
-		ruleset: ['Standard GBU'],
-	},
-	{
-		name: "[Gen 7 Let's Go] Random Battle",
-
-		mod: 'letsgo',
-		team: 'random',
-		searchShow: false,
-		ruleset: ['Obtainable', 'Allow AVs', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
-	},
-	{
-		name: "[Gen 6] Random Battle",
-
-		mod: 'gen6',
-		team: 'random',
-		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 6] Battle Factory",
-		desc: `Randomized teams of Pok&eacute;mon for a generated Smogon tier with sets that are competitively viable.`,
-
-		mod: 'gen6',
-		team: 'randomFactory',
-		searchShow: false,
-		ruleset: ['Obtainable', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
-	},
-	{
-		name: "[Gen 5] Random Battle",
-
-		mod: 'gen5',
-		team: 'random',
-		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 4] Random Battle",
-
-		mod: 'gen4',
-		team: 'random',
-		ruleset: ['Obtainable', 'Sleep Clause Mod', 'HP Percentage Mod', 'Cancel Mod'],
-	},
-	{
-		name: "[Gen 3] Random Battle",
-
-		mod: 'gen3',
-		team: 'random',
-		ruleset: ['Standard'],
-	},
-	{
-		name: "[Gen 2] Random Battle",
-
-		mod: 'gen2',
-		team: 'random',
-		ruleset: ['Standard'],
-	},
-	{
-		name: "[Gen 1] Random Battle",
-
-		mod: 'gen1',
-		team: 'random',
-		ruleset: ['Standard'],
-	},
-	{
-		name: "[Gen 1] Challenge Cup",
-
-		mod: 'gen1',
-		team: 'randomCC',
-		searchShow: false,
-		challengeShow: false,
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	
 	
