@@ -1339,7 +1339,7 @@ export class TeamValidator {
 		// +Mythical to unban Shaymin in Gen 1, for instance.
 		let nonexistentCheck = Tags.nonexistent.genericFilter!(tierSpecies) && ruleTable.check('nonexistent');
 
-		const EXISTENCE_TAG = ['past', 'future', 'lgpe', 'unobtainable', 'cap', 'custom', 'nonexistent'];
+		const EXISTENCE_TAG = ['past', 'pastmove', 'future', 'lgpe', 'unobtainable', 'cap', 'custom', 'nonexistent'];
 
 		for (const ruleid of ruleTable.tagRules) {
 			if (ruleid.startsWith('*')) continue;
@@ -1362,7 +1362,7 @@ export class TeamValidator {
 		}
 
 		if (nonexistentCheck) {
-			if (tierSpecies.isNonstandard === 'Past' || tierSpecies.isNonstandard === 'Future') {
+			if (tierSpecies.isNonstandard === 'Past' || tierSpecies.isNonstandard === 'PastMove' || tierSpecies.isNonstandard === 'Future') {
 				return `${tierSpecies.name} does not exist in Gen ${dex.gen}.`;
 			}
 			if (tierSpecies.isNonstandard === 'LGPE') {
@@ -1552,7 +1552,7 @@ export class TeamValidator {
 
 			banReason = ruleTable.check('nonexistent', setHas);
 			if (banReason) {
-				if (['Past', 'Future'].includes(nature.isNonstandard)) {
+				if (['Past', 'PastMove', 'Future'].includes(nature.isNonstandard)) {
 					return `${set.name}'s nature ${nature.name} does not exist in Gen ${dex.gen}.`;
 				}
 				return `${set.name}'s nature ${nature.name} does not exist in this game.`;
@@ -1574,7 +1574,7 @@ export class TeamValidator {
 	validateEvent(set: PokemonSet, eventData: EventInfo, eventSpecies: Species, because = ``, from = `from an event`) {
 		const dex = this.dex;
 		let name = set.species;
-		const species = dex.getSpecies(set.species);
+		const species = dex.species.get(set.species);
 		const maxSourceGen = this.ruleTable.has('allowtradeback') ? dex.gen + 1 : dex.gen;
 		if (!eventSpecies) eventSpecies = species;
 		if (set.name && set.species !== set.name && species.baseSpecies !== set.name) name = `${set.name} (${set.species})`;

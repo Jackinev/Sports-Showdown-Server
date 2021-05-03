@@ -1556,7 +1556,7 @@ export const commands: Chat.ChatCommands = {
 			if (timer.timerRequesters.size) {
 				this.errorReply(`You can't change timer settings when the timer is already on.`);
 			} else {
-				const timerEntry = Dex.getRuleTable(Dex.getFormat(room.battle.format, true)).timer;
+				const timerEntry = Dex.formats.getRuleTable(Dex.formats.get(room.battle.format, true)).timer;
 				const timerSettings = timerEntry?.[0];
 				timer.setSettings(timerSettings);
 				timer.start(user);
