@@ -1148,7 +1148,6 @@ export class Battle {
 			const chosenTeamSize = this.format.teamLength?.battle;
 			this.add('teampreview' + (chosenTeamSize ? '|' + chosenTeamSize : ''));
 		}
-		if (!maxTeamSize) maxTeamSize = 6;
 
 		const requests = this.getRequests(type);
 		for (let i = 0; i < this.sides.length; i++) {
