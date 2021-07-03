@@ -778,6 +778,9 @@ export class RandomTeams {
 		}
 
 		const hasRestTalk = moves.has('rest') && moves.has('sleeptalk');
+		
+		//S// Reject move if banned by the format
+		if (this.format.randomBanlist && this.format.randomBanlist.includes(move.id)) return {cull: true};
 
 		// Reject moves that need support
 		switch (move.id) {
@@ -1190,18 +1193,6 @@ export class RandomTeams {
 			return {cull: !!counter.setupType};
 		}
 
-		if (move.id !== 'photongeyser' && (
-			(move.category === 'Physical' && counter.setupType === 'Special') ||
-			(move.category === 'Special' && counter.setupType === 'Physical')
-		)) {
-			// Reject STABs last in case the setup type changes later on
-			const stabs = counter[species.types[0]] + (counter[species.types[1]] || 0);
-			if (!hasType[move.type] || stabs > 1 || counter[move.category] < 2) return {cull: true};
-		}
-		
-		// Reject move if banned by the format
-		if (this.format.randomBanlist && this.format.randomBanlist.includes(move.id)) return {cull: true};
-
 		return {cull: false};
 	}
 
@@ -1381,7 +1372,7 @@ export class RandomTeams {
 			// For Swoobat and Clefable
 			return (!!counter.setupType || moves.has('fireblast'));
 		case 'Unburden':
-			return (this.format.forceItem || abilities.has('Prankster') || !counter.setupType && !isDoubles && !hasMove['acrobatics']);
+			return (this.format.forceItem || abilities.has('Prankster') || !counter.setupType && !isDoubles);
 		case 'Volt Absorb':
 			return (this.dex.getEffectiveness('Electric', species) < -1);
 		case 'Water Absorb':
