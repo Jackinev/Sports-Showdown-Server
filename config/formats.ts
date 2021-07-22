@@ -130,65 +130,65 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 
 
-	// National DLC Draft Tiers
+	// National Leaks Draft Tiers
 	///////////////////////////////////////////////////////////////////
 	{
-		section: "National DLC Draft Tiers",
+		section: "National Leaks Draft Tiers",
 	},
 	{
-		name: "[Gen 8] National Dex DLC Draft",
+		name: "[Gen 8] National Dex Leaks Draft",
 
 		mod: 'gen8leaks',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Dynamax",
+		name: "[Gen 8] National Dex Leaks Dynamax",
 
 		mod: 'gen8leaks',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Legacy",
+		name: "[Gen 8] National Dex Leaks Legacy",
 
 		mod: 'gen8leaks',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+PastMove', 'Team Preview', 'Dynamax Clause'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Wifi",
+		name: "[Gen 8] National Dex Leaks Wifi",
 
 		mod: 'gen8leaks',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Adjust Level Down = 50'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Doubles",
+		name: "[Gen 8] National Dex Leaks Doubles",
 
 		mod: 'gen8leaks',
 		gameType: 'doubles',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', '!Sleep Clause Mod'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC VGC",
+		name: "[Gen 8] National Dex Leaks VGC",
 
 		mod: 'gen8leaks',
 		gameType: 'doubles',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', '!Sleep Clause Mod', 'Adjust Level = 50', 'Picked Team Size = 4'],
 	},
 	{
-		name: "[Gen 8] LC National Dex DLC Draft",
+		name: "[Gen 8] LC National Dex Leaks Draft",
 
 		mod: 'gen8leaks',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Double Item Clause', 'Little Cup', 'Dynamax Clause'],
 		banlist: ['Dragon Rage', 'Sonic Boom'],
 	},
 	{
-		name: "[Gen 8] LC National Dex DLC Legacy",
+		name: "[Gen 8] LC National Dex Leaks Legacy",
 
 		mod: 'gen8leaks',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+PastMove', 'Team Preview', 'Double Item Clause', 'Little Cup', 'Dynamax Clause'],
 		banlist: ['Dragon Rage', 'Sonic Boom'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC CAP",
+		name: "[Gen 8] National Dex Leaks CAP",
 
 		mod: 'gen8',
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', '+CAP', 'Team Preview', 'Dynamax Clause'],
@@ -224,6 +224,13 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		banlist: [
 			'Dragapult', 'Shadow Tag', 'Landorus + Sheer Force',
 		],
+	},
+	{
+		name: "[Gen 8] (National Dex) SPS Ability Draft",
+
+		mod: 'abilitydraft',
+		ruleset: ['[Gen 8] National Dex Draft', '!Obtainable Abilities'],
+		
 	},
 	{
 		name: "[Gen 4] Trick House Elimlocke",
@@ -291,7 +298,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Max Team Size = 3'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Multi Draft",
+		name: "[Gen 8] National Dex Leaks Multi Draft",
 
 		mod: 'gen8leaks',
 		gameType: 'multi',
@@ -299,7 +306,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause', 'Max Team Size = 3'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Multi Dynamax",
+		name: "[Gen 8] National Dex Leaks Multi Dynamax",
 
 		mod: 'gen8leaks',
 		gameType: 'multi',
@@ -307,7 +314,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Max Team Size = 3'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC Multi Legacy",
+		name: "[Gen 8] National Dex Leaks Multi Legacy",
 
 		mod: 'gen8leaks',
 		gameType: 'multi',
@@ -372,7 +379,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC FFA Draft",
+		name: "[Gen 8] National Dex Leaks FFA Draft",
 
 		mod: 'gen8leaks',
 		gameType: 'freeforall',
@@ -380,7 +387,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', 'Dynamax Clause'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC FFA Dynamax",
+		name: "[Gen 8] National Dex Leaks FFA Dynamax",
 
 		mod: 'gen8leaks',
 		gameType: 'freeforall',
@@ -388,7 +395,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview'],
 	},
 	{
-		name: "[Gen 8] National Dex DLC FFA Legacy",
+		name: "[Gen 8] National Dex Leaks FFA Legacy",
 
 		mod: 'gen8leaks',
 		gameType: 'freeforall',
@@ -456,6 +463,426 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 	
 	
 	
+	// Sports Randomized Metas
+	///////////////////////////////////////////////////////////////////
+
+	{
+		section: "Sports Randomized Metas",
+		column: 3,
+	},
+	{
+		name: "[Gen 8] Random Battle",
+		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3656537/">Random Battle Suggestions</a>`,
+		],
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['PotD', 'Obtainable', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
+		name: "[Gen 8] Random Battle (Blitz)",
+
+		mod: 'gen8',
+		team: 'random',
+		forcedTimer: true,
+		timer: {starting: 7, addPerTurn: 0, maxPerTurn: 7, maxFirstTurn: 10, timeoutAutoChoose: true},
+		ruleset: ['[Gen 8] Random Battle'],
+	},
+	{
+		name: "[Gen 8] Random Camomons",
+		desc: `Pok&eacute;mon change type to match their first two moves.`,
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: ['Arceus', 'Shedinja', 'Zoroark', 'Ditto'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Pok&eacute;mon change type to match their first two moves.</div>`);
+		},
+		onModifySpecies(species, target, source, effect) {
+			if (!target) return; // Chat command
+			if (effect && ['imposter', 'transform'].includes(effect.id)) return;
+			const types = [...new Set(target.baseMoveSlots.slice(0, 2).map(move => this.dex.moves.get(move.id).type))];
+			return {...species, types: types};
+		},
+		onSwitchIn(pokemon) {
+			this.add('-start', pokemon, 'typechange', (pokemon.illusion || pokemon).getTypes(true).join('/'), '[silent]');
+		},
+		onAfterMega(pokemon) {
+			this.add('-start', pokemon, 'typechange', (pokemon.illusion || pokemon).getTypes(true).join('/'), '[silent]');
+		},
+	},
+	{
+		name: "[Gen 8] Random Chimera 1v1",
+		desc: `Bring 6 Pok&eacute;mon and choose their order at Team Preview. The lead Pok&eacute;mon then receives the item, ability, stats, and moves of the other five Pok&eacute;mon, which play no further part in the battle.`,
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Chimera 1v1 Rule', 'Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: ['Arceus', 'Zoroark', 'Shedinja', 'Darmanitan-Galar', 'Huge Power', 'Pure Power'],
+		level100: true,
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Your 6 Pok&eacute;mon are combined into one according to team order, passing off respectively:<br>* Slot 1: Species and typing<br>* Slot 2: Item<br>* Slot 3: Ability<br>* Slot 4: Stats<br>* Slot 5: Moves 1+2<br>* Slot 6: Moves 3+4</div>`);
+		},
+	},
+	{
+		name: "[Gen 8] Random First Blood",
+		desc: `The first team to have a Pok&eacute;mon faint loses.`,
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">The first team to have a Pok&eacute;mon faint loses.</div>`);
+		},
+		onFaint(target) {
+			this.lose(target.side);
+		},
+	},
+	{
+		name: "[Gen 8] Random Mix and Mega",
+		desc: `Mega evolve any Pok&eacute;mon with any mega stone and no limit. Boosts based on mega evolution from gen 7.`,
+
+		mod: 'mixandmega',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: [
+			'Arceus', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Speed', 'Dialga', 'Giratina', 'Groudon', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 
+			'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
+			'Palkia', 'Pheromosa', 'Rayquaza', 'Regigigas', 'Reshiram', 'Slaking', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zekrom',
+			'Eternatus', 'Zacian', 'Zamazenta',
+		],
+		forceItem: [
+			'Abomasite', 'Absolite', 'Aerodactylite', 'Aggronite', 'Alakazite', 'Altarianite', 'Ampharosite', 'Audinite', 'Banettite', 'Blastoisinite', 
+			'Cameruptite', 'Charizardite X', 'Charizardite Y', 'Diancite', 'Galladite', 'Garchompite', 'Gardevoirite', 'Glalitite', 'Gyaradosite', 
+			'Heracronite', 'Houndoominite', 'Latiasite', 'Latiosite', 'Lopunnite', 'Lucarionite', 'Manectite', 'Metagrossite', 'Mewtwonite X', 'Mewtwonite Y', 
+			'Pinsirite', 'Sablenite', 'Salamencite', 'Sceptilite', 'Scizorite', 'Sharpedonite', 'Slowbronite', 'Steelixite', 'Swampertite', 'Tyranitarite', 
+			'Venusaurite', 
+		],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Mega evolve any Pok&eacute;mon with any mega stone and no limit. Boosts based on mega evolution stat boosts from gen 7.</div>`);
+			for (const pokemon of this.getAllPokemon()) {
+				pokemon.m.originalSpecies = pokemon.baseSpecies.name;
+			}
+		},
+		onSwitchIn(pokemon) {
+			// @ts-ignore
+			const oMegaSpecies = this.dex.species.get(pokemon.species.originalMega);
+			if (oMegaSpecies.exists && pokemon.m.originalSpecies !== oMegaSpecies.baseSpecies) {
+				// Place volatiles on the Pokémon to show its mega-evolved condition and details
+				this.add('-start', pokemon, oMegaSpecies.requiredItem || oMegaSpecies.requiredMove, '[silent]');
+				const oSpecies = this.dex.species.get(pokemon.m.originalSpecies);
+				if (oSpecies.types.length !== pokemon.species.types.length || oSpecies.types[1] !== pokemon.species.types[1]) {
+					this.add('-start', pokemon, 'typechange', pokemon.species.types.join('/'), '[silent]');
+				}
+			}
+		},
+		onSwitchOut(pokemon) {
+			// @ts-ignore
+			const oMegaSpecies = this.dex.species.get(pokemon.species.originalMega);
+			if (oMegaSpecies.exists && pokemon.m.originalSpecies !== oMegaSpecies.baseSpecies) {
+				this.add('-end', pokemon, oMegaSpecies.requiredItem || oMegaSpecies.requiredMove, '[silent]');
+			}
+		},
+	},
+	{
+		name: "[Gen 8] Random Partners in Crime",
+		desc: `Doubles-based metagame where both active ally Pok&eacute;mon share abilities and moves.`,
+
+		mod: 'partnersincrime',
+		gameType: 'doubles',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: [
+			'Arctovish', 'Arctozolt', 'Dracovish', 'Dracozolt', 'Golisopod', 'Wimpod',
+			'Huge Power', 'Imposter', 'Moody', 'Normalize', 'Pure Power', 'Trace', 'Wonder Guard',
+		],
+		onSwitchInPriority: 2,
+		onSwitchIn(pokemon) {
+			for (const side of this.sides) {
+				if (side.allies().every(ally => ally && !ally.fainted)) {
+					const a = side.active[0];
+					const b = side.active[1];
+					const aInnate = 'ability:' + b.ability;
+					a.volatiles[aInnate] = {id: aInnate, target: a};
+					const bInnate = 'ability:' + a.ability;
+					b.volatiles[bInnate] = {id: bInnate, target: b};
+				}
+			}
+			const ally = pokemon.side.active.find(mon => mon && mon !== pokemon && !mon.fainted);
+			if (ally && ally.ability !== pokemon.ability) {
+				if (!pokemon.m.innate) {
+					pokemon.m.innate = 'ability:' + ally.ability;
+					delete pokemon.volatiles[pokemon.m.innate];
+					pokemon.addVolatile(pokemon.m.innate);
+				}
+				if (!ally.m.innate) {
+					ally.m.innate = 'ability:' + pokemon.ability;
+					delete ally.volatiles[ally.m.innate];
+					ally.addVolatile(ally.m.innate);
+				}
+			}
+		},
+		onSwitchOut(pokemon) {
+			if (pokemon.m.innate) {
+				pokemon.removeVolatile(pokemon.m.innate);
+				delete pokemon.m.innate;
+			}
+			const ally = pokemon.side.active.find(mon => mon && mon !== pokemon && !mon.fainted);
+			if (ally && ally.m.innate) {
+				ally.removeVolatile(ally.m.innate);
+				delete ally.m.innate;
+			}
+		},
+		onFaint(pokemon) {
+			if (pokemon.m.innate) {
+				pokemon.removeVolatile(pokemon.m.innate);
+				delete pokemon.m.innate;
+			}
+			const ally = pokemon.side.active.find(mon => mon && mon !== pokemon && !mon.fainted);
+			if (ally && ally.m.innate) {
+				ally.removeVolatile(ally.m.innate);
+				delete ally.m.innate;
+			}
+		},
+	},
+	{
+		name: "[Gen 8] Random Scalemons",
+		desc: `Every Pok&eacute;mon's stats, barring HP, are scaled to give them a BST as close to 600 as possible.`,
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'Scalemons Mod'],
+		randomBanlist: [
+			'Abra', 'Carvanha', 'Gastly', 'Darmanitan-Galar', 'Glalie',
+			'Huge Power', 'Pure Power', 'Moody',
+		],
+		allowUnevolved: true,
+		level100: true,
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Every Pok&eacute;mon's stats, barring HP, are scaled to give them a BST as close to 600 as possible.</div>`);
+		},
+	},
+	{
+		name: "[Gen 8] Random Shared Power",
+		desc: `Once a Pok&eacute;mon switches in, its ability is shared with the rest of the team.`,
+
+		mod: 'sharedpower',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: [
+			'Darmanitan-Galar', 'Zoroark', 'Ditto', 'Shedinja', 'Furfrou', 'Golisopod', 'Tornadus-Therian', 'Bibarel', 
+			'Swoobat', 'Gardevoir', 'Porygon2', 'Glalie',
+			'Arena Trap', 'Fur Coat', 'Huge Power', 'Moody', 'Neutralizing Gas', 'Pure Power', 'Regenerator',
+			'Shadow Tag', 'Simple', 'Speed Boost', 'Trace', 'Ice Scales',
+		],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Once a Pok&eacute;mon switches in, its ability is shared with the rest of the team.</div>`);
+		},
+		getSharedPower(pokemon) {
+			const sharedPower = new Set<string>();
+			for (const ally of pokemon.side.pokemon) {
+				if (ally.previouslySwitchedIn > 0) {
+					if (pokemon.battle.dex.currentMod !== 'sharedpower' && ['trace', 'mirrorarmor'].includes(ally.baseAbility)) {
+						sharedPower.add('noability');
+						continue;
+					}
+					sharedPower.add(ally.baseAbility);
+				}
+			}
+			sharedPower.delete(pokemon.baseAbility);
+			return sharedPower;
+		},
+		onBeforeSwitchIn(pokemon) {
+			let format = this.format;
+			if (!format.getSharedPower) format = this.dex.formats.get('gen8sharedpower');
+			for (const ability of format.getSharedPower!(pokemon)) {
+				const effect = 'ability:' + ability;
+				pokemon.volatiles[effect] = {id: this.toID(effect), target: pokemon};
+				if (!pokemon.m.abils) pokemon.m.abils = [];
+				if (!pokemon.m.abils.includes(effect)) pokemon.m.abils.push(effect);
+			}
+		},
+		onSwitchInPriority: 2,
+		onSwitchIn(pokemon) {
+			let format = this.format;
+			if (!format.getSharedPower) format = this.dex.formats.get('gen8sharedpower');
+			for (const ability of format.getSharedPower!(pokemon)) {
+				if (ability === 'noability') {
+					this.hint(`Mirror Armor and Trace break in Shared Power formats that don't use Shared Power as a base, so they get removed from non-base users.`);
+				}
+				const effect = 'ability:' + ability;
+				delete pokemon.volatiles[effect];
+				pokemon.addVolatile(effect);
+			}
+		},
+	},
+	{
+		name: "[Gen 8] Random Tier Shift",
+		desc: `Pok&eacute;mon below OU get all their base stats boosted, except HP. UU/RUBL get +10, RU/NUBL get +20, NU/PUBL get +30, PU and NFE get +40, LC get +50. Ubers get -10.`,
+		
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		allowUnevolved: true,
+		level100: true,
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Pok&eacute;mon below OU get all their base stats boosted, except HP:<br>* UU/RUBL: +10<br>* RU/NUBL: +20<br>* NU/PUBL: +30<br>* PU/NFE: +40<br>* LC: +50<br>* Uber: -10</div>`);
+		},
+		onModifySpecies(species, target, source, effect) {
+			if (!species.baseStats) return;
+			const boosts: {[tier: string]: number} = {
+				uber: -10,
+				uu: 10,
+				rubl: 10,
+				ru: 20,
+				nubl: 20,
+				nu: 30,
+				publ: 30,
+				pu: 40,
+				nfe: 40,
+				lc: 50,
+			};
+			let tier = this.toID(species.tier) || 'ou';
+			if (!(tier in boosts)) return;
+			// Non-Pokemon bans in lower tiers
+			if (target && boosts[tier] > 20) {
+				if (target.set.ability === 'drizzle') tier = 'nubl';
+				if (target.set.ability === 'drought') tier = 'nubl';
+				if (target.set.ability === 'snowwarning') tier = 'nubl';
+			}
+			const pokemon = this.dex.deepClone(species);
+			pokemon.bst = pokemon.baseStats['hp'];
+			const boost = boosts[tier];
+			let statName: StatID;
+			for (statName in pokemon.baseStats as StatsTable) {
+				if (statName === 'hp') continue;
+				pokemon.baseStats[statName] = this.clampIntRange(pokemon.baseStats[statName] + boost, 1, 255);
+				pokemon.bst += pokemon.baseStats[statName];
+			}
+			return pokemon;
+		},
+	},
+	{
+		name: "[Gen 8] Dynamax Frenzy",
+		desc: `All Pok&eacute;mon are always Dynamaxed.`,
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon are always Dynamaxed.</div>`);
+		},
+		onSwitchIn(pokemon) {
+			pokemon.canDynamax = true;
+			pokemon.addVolatile('dynamax');
+			pokemon.volatiles['dynamax'].duration = 0;
+			pokemon.canDynamax = false;
+		},
+	},
+	{
+		name: "[Gen 8] Inverse Random Battle",
+		desc: `The type effectiveness chart is inverted: weaknesses become resistances, while resistances and immunities become weaknesses.`,
+		
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Inverse Mod'],
+		randomBanlist: ['Arceus', 'Linoone'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">The type effectiveness chart is inverted: weaknesses become resistances, while resistances and immunities become weaknesses.</div>`);
+		},
+	},
+	{
+		name: "[Gen 8] Protean Palace",
+		desc: `All Pok&eacute;mon have the Protean effect on top of their regular ability.`,
+		
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: ['Arceus', 'Greninja', 'Kecleon', 'Shedinja'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon have the Protean effect on top of their regular ability.</div>`);
+		},
+		onPrepareHitPriority: -1,
+		onPrepareHit(source, target, move) {
+			if (move.hasBounced) return;
+			const type = move.type;
+			if (type && type !== '???' && source.getTypes().join() !== type) {
+				if (!source.setType(type)) return;
+				this.add('-start', source, 'typechange', type);
+			}
+		},
+	},
+	{
+		name: "[Gen 8] Shifting Illusions",
+		desc: `All Pok&eacute;mon have the Illusion effect on top of their regular ability.`,
+		
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: ['Ditto', 'Zoroark'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon have the Illusion effect on top of their regular ability.</div>`);
+		},
+		onBeforeSwitchIn(pokemon) {
+			pokemon.illusion = null;
+			// yes, you can Illusion an active pokemon but only if it's to your right
+			for (let i = pokemon.side.pokemon.length - 1; i > pokemon.position; i--) {
+				const possibleTarget = pokemon.side.pokemon[i];
+				if (!possibleTarget.fainted) {
+					pokemon.illusion = possibleTarget;
+					break;
+				}
+			}
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (target.illusion) {
+				this.singleEvent('End', this.dex.abilities.get('Illusion'), target.abilityState, target, source, move);
+			}
+		},
+		onEnd(pokemon) {
+			if (pokemon.illusion) {
+				this.debug('illusion cleared');
+				pokemon.illusion = null;
+				const details = pokemon.species.name + (pokemon.level === 100 ? '' : ', L' + pokemon.level) +
+					(pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
+				this.add('replace', pokemon, details);
+				this.add('-end', pokemon, 'Illusion');
+			}
+		},
+		onFaint(pokemon) {
+			pokemon.illusion = null;
+		},
+	},
+	{
+		name: "[Gen 8] VoltTurn Mayhem",
+		desc: `All Pok&eacute;mon automatically switch out upon using a move that affects the opponent.`,
+		
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+		randomBanlist: ['fakeout'],
+		onBegin() {
+			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon automatically switch out upon using a move that affects the opponent.</div>`);
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move) {
+			switch (move.target) {
+			case 'normal':
+			case 'randomNormal':
+			case 'allAdjacent':
+			case 'allAdjacentFoes':
+			case 'any':
+			case 'scripted':
+				move.selfSwitch = true;
+			}
+		},
+	},
+	
+	
+	
 	// Other Metagames
 	///////////////////////////////////////////////////////////////////
 
@@ -464,43 +891,6 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		column: 3,
 	},
 	{
-        name: "[Gen 8] (National Dex) Astrea Cup",
-
-        mod: 'gen8',
-        gameType: 'doubles',
-        ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview', '+Past', '+PastMove', 'Dynamax Clause', '!Sleep Clause Mod', '!OHKO Clause', 'Item Clause', 'Adjust Level = 50', 'Picked Team Size = 4', 'Min Source Gen = 7'],
-        banlist: [
-			// Mons
-			'Mewtwo', 'Mew', 'Lugia', 'Ho-oh', 'Celebi', 'Kyogre', 'Groudon', 'Rayquaza', 'Jirachi', 'Deoxys', 'Dialga', 'Palkia', 'Giratina',
-			'Phione', 'Manaphy', 'Darkrai', 'Shaymin', 'Arceus', 'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Keldeo', 'Meloetta', 'Genesect',
-			'Floette-Eternal', 'Xerneas', 'Yveltal', 'Zygarde', 'Diancie', 'Hoopa', 'Volcanion', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala',
-			'Necrozma', 'Magearna', 'Marshadow', 'Zeraora', 'Meltan', 'Melmetal', 'Zacian', 'Zamazenta', 'Eternatus', 'Zarude', 'Calyrex',
-			'Calyrex-Ice', 'Calyrex-Shadow',
-			// Forms
-			'Battle Bond', 'Mega',
-			// Moves + Abilities
-			'Ally Switch', 'Guard Split', 'Fishious Rend', 'Bolt Beak', 'Wicked Blow', 'Surging Strikes',
-			// Z-Moves
-			'Buginium Z', 'Darkinium Z', 'Dragonium Z', 'Electrium Z', 'Fairium Z', 'Fightinium Z', 'Firium Z', 'Flyinium Z', 
-			'Ghostium Z', 'Grassium Z', 'Groundium Z', 'Icium Z', 'Normalium Z', 'Poisonium Z', 'Psychium Z', 'Rockium Z', 
-			'Steelium Z', 'Waterium Z', 'Aloraichium Z', 'Decidium Z', 'Eevium Z', 'Incinium Z', 'Kommonium Z', 'Lunalium Z', 
-			'Lycanium Z', 'Marshadium Z', 'Mewnium Z', 'Mimikium Z', 'Pikanium Z', 'Pikashunium Z', 'Primarium Z', 'Snorlium Z', 
-			'Solganium Z', 'Tapunium Z', 'Ultranecrozium Z',
-			// Illegal moves
-			'Smeargle + Grassy Glide', 'Smeargle + Dynamax Cannon', 'Smeargle + Snipe Shot', 'Smeargle + Jaw Lock', 'Smeargle + Stuff Cheeks', 
-			'Smeargle + No Retreat', 'Smeargle + Tar Shot', 'Smeargle + Magic Powder', 'Smeargle + Dragon Darts', 'Smeargle + Teatime', 
-			'Smeargle + Octolock', 'Smeargle + Court Change', 'Smeargle + Clangorous Soul', 'Smeargle + Body Press', 'Smeargle + Decorate', 
-			'Smeargle + Drum Beating', 'Smeargle + Snap Trap', 'Smeargle + Pyro Ball', 'Smeargle + Behemoth Blade', 'Smeargle + Behemoth Bash', 
-			'Smeargle + Aura Wheel', 'Smeargle + Breaking Swipe', 'Smeargle + Branch Poke', 'Smeargle + Overdrive', 'Smeargle + Apple Acid', 
-			'Smeargle + Grav Apple', 'Smeargle + Spirit Break', 'Smeargle + Strange Steam', 'Smeargle + Life Dew', 'Smeargle + Obstruct', 
-			'Smeargle + False Surrender', 'Smeargle + Meteor Assault', 'Smeargle + Eternabeam', 'Smeargle + Steel Beam', 'Smeargle + Expanding Force', 
-			'Smeargle + Steel Roller', 'Smeargle + Scale Shot', 'Smeargle + Meteor Beam', 'Smeargle + Misty Explosion', 'Smeargle + Rising Voltage', 
-			'Smeargle + Terrain Pulse', 'Smeargle + Skitter Smack', 'Smeargle + Burning Jealousy', 'Smeargle + Lash Out', 'Smeargle + Poltergeist', 
-			'Smeargle + Corrosive Gas', 'Smeargle + Coaching', 'Smeargle + Flip Turn', 'Smeargle + Triple Axel', 'Smeargle + Dual Wingbeat', 
-			'Smeargle + Scorching Sands', 'Clefairy + Teleport', 'Clefable + Teleport', 'Arcanine + Teleport',
-		],
-    },
-	{
 		name: "[Gen 8] Almost Any Ability",
 		desc: `Pok&eacute;mon have access to almost any ability.`,
 		threads: [
@@ -508,6 +898,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		],
 
 		mod: 'gen8',
+		searchShow: false,
 		ruleset: ['[Gen 8] National Dex Draft', '!Obtainable Abilities', '2 Ability Clause'],
 		banlist: [
 			'Arena Trap', 'Comatose', 'Contrary', 'Fluffy', 'Fur Coat', 'Gorilla Tactics', 'Huge Power', 'Ice Scales', 'Illusion', 'Imposter', 'Innards Out', 'Intrepid Sword', 'Libero',
@@ -547,17 +938,6 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 			'Neutralizing Gas', 'Parental Bond', 'Protean', 'Pure Power', 'Shadow Tag', 'Stakeout', 'Water Bubble', 'Wonder Guard',
 			'Comatose + Sleep Talk', 'Double Iron Bash', 'Octolock', 'Shell Smash',
 		],
-		restricted: ['Zacian-Crowned'],
-		onValidateSet(set) {
-			const ability = this.dex.abilities.get(set.ability);
-			if (set.species === 'Zacian-Crowned') {
-				if (this.dex.toID(set.item) !== 'rustedsword' || ability.id !== 'intrepidsword') {
-					return [`${set.species} is banned.`];
-				}
-			} else if (ability.id === 'intrepidsword') {
-				return [`${set.name}'s ability ${ability.name} is banned.`];
-			}
-		},
 		onChangeSet(set) {
 			const item = this.dex.toID(set.item);
 			if (set.species === 'Zacian' && item === 'rustedsword') {
@@ -604,6 +984,17 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		},
 	},
 	{
+		name: "[Gen 8] Chimera 1v1",
+		desc: `Bring 6 Pok&eacute;mon and choose their order at Team Preview. The lead Pok&eacute;mon then receives the item, ability, stats, and moves of the other five Pok&eacute;mon, which play no further part in the battle.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3661215/">Chimera 1v1</a>`,
+		],
+
+		mod: 'gen8',
+		ruleset: ['Chimera 1v1 Rule', 'Standard', 'Dynamax Clause', 'Sleep Moves Clause'],
+		banlist: ['Shedinja', 'Huge Power', 'Moody', 'Neutralizing Gas', 'Perish Body', 'Truant', 'Eviolite', 'Focus Sash', 'Perish Song', 'Transform', 'Trick', 'Fishious Rend', 'Bolt Beak', 'Disable', 'Double Iron Bash', 'Switcheroo'],
+	},
+	{
 		name: "[Gen 8] Cross Evolution",
 		desc: `Give a Pok&eacute;mon a Pok&eacute;mon name of the next evolution stage as a nickname to inherit stat changes, typing, abilities, and up to 2 moves from the next stage Pok&eacute;mon.`,
 		threads: [
@@ -611,7 +1002,6 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		],
 
 		mod: 'gen8',
-		searchShow: false,
 		ruleset: ['[Gen 8] National Dex Draft', 'Overflow Stat Mod'],
 		banlist: [
 			'Arena Trap', 'Ice Scales', 'Moody', 'King\'s Rock',
@@ -735,6 +1125,27 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 			for (const pokemon of this.getAllPokemon()) {
 				pokemon.baseSpecies = pokemon.species;
 			}
+		},
+	},
+	{
+		name: "[Gen 8] First Blood",
+		desc: `The first team to have a Pok&eacute;mon faint loses.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3682954/">First Blood</a>`,
+		],
+
+		mod: 'gen8',
+		ruleset: ['[Gen 8] National Dex Draft'],
+		banlist: [
+			'Calyrex-Ice', 'Calyrex-Shadow', 'Cinderace', 'Darmanitan-Galar', 'Dialga', 'Dracovish', 'Eternatus', 'Genesect', 'Giratina',
+			'Giratina-Origin', 'Groudon', 'Heatran', 'Ho-Oh', 'Kyogre', 'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Landorus-Base',
+			'Magearna', 'Marshadow', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia', 'Pheromosa', 'Porygon-Z',
+			'Rayquaza', 'Reshiram', 'Solgaleo', 'Spectrier', 'Urshifu-Base', 'Xerneas', 'Yveltal', 'Zacian', 'Zacian-Crowned', 'Zamazenta',
+			'Zamazenta-Crowned', 'Zekrom', 'Zygarde-Base', 'Arena Trap', 'Magnet Pull', 'Moody', 'Power Construct', 'Shadow Tag', 'Eject Button',
+			'Baton Pass', 'Swagger',
+		],
+		onFaint(target) {
+			this.lose(target.side);
 		},
 	},
 	{
@@ -1009,7 +1420,6 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		],
 
 		mod: 'gen8',
-		searchShow: false,
 		ruleset: ['[Gen 8] National Dex Draft'],
 		banlist: [
 			//
@@ -1050,6 +1460,69 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 				}
 				return stats;
 			},
+		},
+	},
+	{
+		name: "[Gen 8] Partners in Crime",
+		desc: `Doubles-based metagame where both active ally Pok&eacute;mon share abilities and moves.`,
+		threads: [
+			`&bullet; <a href="https://www.smogon.com/forums/threads/3664347/">Partners in Crime</a>`,
+		],
+
+		mod: 'partnersincrime',
+		gameType: 'doubles',
+		ruleset: ['[Gen 8] National Dex Draft'],
+		banlist: [
+			'Arctovish', 'Arctozolt', 'Dracovish', 'Dracozolt', 'Golisopod', 'Wimpod',
+			'Huge Power', 'Imposter', 'Moody', 'Normalize', 'Pure Power', 'Trace', 'Wonder Guard',
+		],
+		onSwitchInPriority: 2,
+		onSwitchIn(pokemon) {
+			for (const side of this.sides) {
+				if (side.allies().every(ally => ally && !ally.fainted)) {
+					const a = side.active[0];
+					const b = side.active[1];
+					const aInnate = 'ability:' + b.ability;
+					a.volatiles[aInnate] = {id: aInnate, target: a};
+					const bInnate = 'ability:' + a.ability;
+					b.volatiles[bInnate] = {id: bInnate, target: b};
+				}
+			}
+			const ally = pokemon.side.active.find(mon => mon && mon !== pokemon && !mon.fainted);
+			if (ally && ally.ability !== pokemon.ability) {
+				if (!pokemon.m.innate) {
+					pokemon.m.innate = 'ability:' + ally.ability;
+					delete pokemon.volatiles[pokemon.m.innate];
+					pokemon.addVolatile(pokemon.m.innate);
+				}
+				if (!ally.m.innate) {
+					ally.m.innate = 'ability:' + pokemon.ability;
+					delete ally.volatiles[ally.m.innate];
+					ally.addVolatile(ally.m.innate);
+				}
+			}
+		},
+		onSwitchOut(pokemon) {
+			if (pokemon.m.innate) {
+				pokemon.removeVolatile(pokemon.m.innate);
+				delete pokemon.m.innate;
+			}
+			const ally = pokemon.side.active.find(mon => mon && mon !== pokemon && !mon.fainted);
+			if (ally && ally.m.innate) {
+				ally.removeVolatile(ally.m.innate);
+				delete ally.m.innate;
+			}
+		},
+		onFaint(pokemon) {
+			if (pokemon.m.innate) {
+				pokemon.removeVolatile(pokemon.m.innate);
+				delete pokemon.m.innate;
+			}
+			const ally = pokemon.side.active.find(mon => mon && mon !== pokemon && !mon.fainted);
+			if (ally && ally.m.innate) {
+				ally.removeVolatile(ally.m.innate);
+				delete ally.m.innate;
+			}
 		},
 	},
 	{
@@ -1464,376 +1937,6 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		onValidateSet(set) {
 			if (set.moves.length !== 1 || this.dex.moves.get(set.moves[0]).id !== 'metronome') {
 				return [`${set.name || set.species} has illegal moves.`, `(Pok\u00e9mon can only have one Metronome in their moveset)`];
-			}
-		},
-	},
-	
-	
-	
-	// Sports Randomized Metas
-	///////////////////////////////////////////////////////////////////
-
-	{
-		section: "Sports Randomized Metas",
-		column: 3,
-	},
-	{
-		name: "[Gen 8] Random Battle",
-		desc: `Randomized teams of level-balanced Pok&eacute;mon with sets that are generated to be competitively viable.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3656537/">Random Battle Suggestions</a>`,
-		],
-
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['PotD', 'Obtainable', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
-	},
-	{
-		name: "[Gen 8] Random Battle (Blitz)",
-
-		mod: 'gen8',
-		team: 'random',
-		forcedTimer: true,
-		timer: {starting: 7, addPerTurn: 0, maxPerTurn: 7, maxFirstTurn: 10, timeoutAutoChoose: true},
-		ruleset: ['[Gen 8] Random Battle'],
-	},
-	{
-		name: "[Gen 8] Random Camomons",
-		desc: `Pok&eacute;mon change type to match their first two moves.`,
-
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		randomBanlist: ['Arceus', 'Shedinja', 'Zoroark', 'Ditto'],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Pok&eacute;mon change type to match their first two moves.</div>`);
-		},
-		onModifySpecies(species, target, source, effect) {
-			if (!target) return; // Chat command
-			if (effect && ['imposter', 'transform'].includes(effect.id)) return;
-			const types = [...new Set(target.baseMoveSlots.slice(0, 2).map(move => this.dex.moves.get(move.id).type))];
-			return {...species, types: types};
-		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'typechange', (pokemon.illusion || pokemon).getTypes(true).join('/'), '[silent]');
-		},
-		onAfterMega(pokemon) {
-			this.add('-start', pokemon, 'typechange', (pokemon.illusion || pokemon).getTypes(true).join('/'), '[silent]');
-		},
-	},
-	{
-		name: "[Gen 8] Random Chimera",
-		desc: `Bring 6 Pok&eacute;mon and choose their order at Team Preview. The lead Pok&eacute;mon then receives the item, ability, stats, and moves of the other five Pok&eacute;mon, who play no further part in the battle.`,
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/3607451/">Chimera</a>`,
-		],
-
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Team Preview', 'Dynamax Clause', 'Picked Team Size = 6'],
-		randomBanlist: ['Arceus', 'Zoroark', 'Shedinja', 'Darmanitan-Galar', 'Huge Power', 'Pure Power'],
-		level100: true,
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Your 6 Pok&eacute;mon are combined into one according to team order, passing off respectively:<br>* Slot 1: Species and typing<br>* Slot 2: Item<br>* Slot 3: Ability<br>* Slot 4: Stats<br>* Slot 5: Moves 1+2<br>* Slot 6: Moves 3+4</div>`);
-		},
-		onBeforeSwitchIn(pokemon) {
-			const allies = pokemon.side.pokemon.splice(1);
-			pokemon.side.pokemonLeft = 1;
-			const species = this.dex.deepClone(pokemon.baseSpecies);
-			pokemon.item = allies[0].item;
-			species.abilities = allies[1].baseSpecies.abilities;
-			pokemon.ability = pokemon.baseAbility = allies[1].ability;
-
-			// Stats
-			species.baseStats = allies[2].baseSpecies.baseStats;
-			pokemon.hp = pokemon.maxhp = species.maxHP = allies[2].maxhp;
-			pokemon.set.evs = allies[2].set.evs;
-			pokemon.set.nature = allies[2].getNature().name;
-			// @ts-ignore
-			pokemon.set.ivs = pokemon.baseIvs = allies[2].set.ivs;
-			// @ts-ignore
-			pokemon.hpType = pokemon.baseHpType = allies[2].baseHpType;
-
-			// @ts-ignore
-			pokemon.moveSlots = pokemon.baseMoveSlots = allies[3].baseMoveSlots.slice(0, 2).concat(allies[4].baseMoveSlots.slice(2)).filter((move, index, moveSlots) => moveSlots.find(othermove => othermove.id === move.id) === move);
-			pokemon.setSpecies(species);
-		},
-	},
-	{
-		name: "[Gen 8] Random Mix and Mega",
-		desc: `Mega evolve any Pok&eacute;mon with any mega stone and no limit. Boosts based on mega evolution from gen 7.`,
-
-		mod: 'mixandmega',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		randomBanlist: [
-			'Arceus', 'Deoxys', 'Deoxys-Attack', 'Deoxys-Speed', 'Dialga', 'Giratina', 'Groudon', 'Ho-Oh', 'Hoopa-Unbound', 'Kyogre', 
-			'Kyurem-Black', 'Kyurem-White', 'Lugia', 'Lunala', 'Marshadow', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
-			'Palkia', 'Pheromosa', 'Rayquaza', 'Regigigas', 'Reshiram', 'Slaking', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zekrom',
-			'Eternatus', 'Zacian', 'Zamazenta',
-		],
-		forceItem: [
-			'Abomasite', 'Absolite', 'Aerodactylite', 'Aggronite', 'Alakazite', 'Altarianite', 'Ampharosite', 'Audinite', 'Banettite', 'Blastoisinite', 
-			'Cameruptite', 'Charizardite X', 'Charizardite Y', 'Diancite', 'Galladite', 'Garchompite', 'Gardevoirite', 'Glalitite', 'Gyaradosite', 
-			'Heracronite', 'Houndoominite', 'Latiasite', 'Latiosite', 'Lopunnite', 'Lucarionite', 'Manectite', 'Metagrossite', 'Mewtwonite X', 'Mewtwonite Y', 
-			'Pinsirite', 'Sablenite', 'Salamencite', 'Sceptilite', 'Scizorite', 'Sharpedonite', 'Slowbronite', 'Steelixite', 'Swampertite', 'Tyranitarite', 
-			'Venusaurite', 
-		],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Mega evolve any Pok&eacute;mon with any mega stone and no limit. Boosts based on mega evolution stat boosts from gen 7.</div>`);
-			for (const pokemon of this.getAllPokemon()) {
-				pokemon.m.originalSpecies = pokemon.baseSpecies.name;
-			}
-		},
-		onSwitchIn(pokemon) {
-			// @ts-ignore
-			const oMegaSpecies = this.dex.species.get(pokemon.species.originalMega);
-			if (oMegaSpecies.exists && pokemon.m.originalSpecies !== oMegaSpecies.baseSpecies) {
-				// Place volatiles on the Pokémon to show its mega-evolved condition and details
-				this.add('-start', pokemon, oMegaSpecies.requiredItem || oMegaSpecies.requiredMove, '[silent]');
-				const oSpecies = this.dex.species.get(pokemon.m.originalSpecies);
-				if (oSpecies.types.length !== pokemon.species.types.length || oSpecies.types[1] !== pokemon.species.types[1]) {
-					this.add('-start', pokemon, 'typechange', pokemon.species.types.join('/'), '[silent]');
-				}
-			}
-		},
-		onSwitchOut(pokemon) {
-			// @ts-ignore
-			const oMegaSpecies = this.dex.species.get(pokemon.species.originalMega);
-			if (oMegaSpecies.exists && pokemon.m.originalSpecies !== oMegaSpecies.baseSpecies) {
-				this.add('-end', pokemon, oMegaSpecies.requiredItem || oMegaSpecies.requiredMove, '[silent]');
-			}
-		},
-	},
-	{
-		name: "[Gen 8] Random Scalemons",
-		desc: `Every Pok&eacute;mon's stats, barring HP, are scaled to give them a BST as close to 600 as possible.`,
-
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'Scalemons Mod'],
-		randomBanlist: [
-			'Abra', 'Carvanha', 'Gastly', 'Darmanitan-Galar', 'Glalie',
-			'Huge Power', 'Pure Power', 'Moody',
-		],
-		allowUnevolved: true,
-		level100: true,
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Every Pok&eacute;mon's stats, barring HP, are scaled to give them a BST as close to 600 as possible.</div>`);
-		},
-	},
-	{
-		name: "[Gen 8] Random Shared Power",
-		desc: `Once a Pok&eacute;mon switches in, its ability is shared with the rest of the team.`,
-
-		mod: 'sharedpower',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		randomBanlist: [
-			'Darmanitan-Galar', 'Zoroark', 'Ditto', 'Shedinja', 'Furfrou', 'Golisopod', 'Tornadus-Therian', 'Bibarel', 
-			'Swoobat', 'Gardevoir', 'Porygon2', 'Glalie',
-			'Arena Trap', 'Fur Coat', 'Huge Power', 'Moody', 'Neutralizing Gas', 'Pure Power', 'Regenerator',
-			'Shadow Tag', 'Simple', 'Speed Boost', 'Trace', 'Ice Scales',
-		],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Once a Pok&eacute;mon switches in, its ability is shared with the rest of the team.</div>`);
-		},
-		getSharedPower(pokemon) {
-			const sharedPower = new Set<string>();
-			for (const ally of pokemon.side.pokemon) {
-				if (ally.previouslySwitchedIn > 0) {
-					if (pokemon.battle.dex.currentMod !== 'sharedpower' && ['trace', 'mirrorarmor'].includes(ally.baseAbility)) {
-						sharedPower.add('noability');
-						continue;
-					}
-					sharedPower.add(ally.baseAbility);
-				}
-			}
-			sharedPower.delete(pokemon.baseAbility);
-			return sharedPower;
-		},
-		onBeforeSwitchIn(pokemon) {
-			let format = this.format;
-			if (!format.getSharedPower) format = this.dex.formats.get('gen8sharedpower');
-			for (const ability of format.getSharedPower!(pokemon)) {
-				const effect = 'ability:' + ability;
-				pokemon.volatiles[effect] = {id: this.toID(effect), target: pokemon};
-				if (!pokemon.m.abils) pokemon.m.abils = [];
-				if (!pokemon.m.abils.includes(effect)) pokemon.m.abils.push(effect);
-			}
-		},
-		onSwitchInPriority: 2,
-		onSwitchIn(pokemon) {
-			let format = this.format;
-			if (!format.getSharedPower) format = this.dex.formats.get('gen8sharedpower');
-			for (const ability of format.getSharedPower!(pokemon)) {
-				if (ability === 'noability') {
-					this.hint(`Mirror Armor and Trace break in Shared Power formats that don't use Shared Power as a base, so they get removed from non-base users.`);
-				}
-				const effect = 'ability:' + ability;
-				delete pokemon.volatiles[effect];
-				pokemon.addVolatile(effect);
-			}
-		},
-	},
-	{
-		name: "[Gen 8] Random Tier Shift",
-		desc: `Pok&eacute;mon below OU get all their base stats boosted, except HP. UU/RUBL get +10, RU/NUBL get +20, NU/PUBL get +30, PU and NFE get +40, LC get +50. Ubers get -10.`,
-		
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		allowUnevolved: true,
-		level100: true,
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">Pok&eacute;mon below OU get all their base stats boosted, except HP:<br>* UU/RUBL: +10<br>* RU/NUBL: +20<br>* NU/PUBL: +30<br>* PU/NFE: +40<br>* LC: +50<br>* Uber: -10</div>`);
-		},
-		onModifySpecies(species, target, source, effect) {
-			if (!species.baseStats) return;
-			const boosts: {[tier: string]: number} = {
-				uber: -10,
-				uu: 10,
-				rubl: 10,
-				ru: 20,
-				nubl: 20,
-				nu: 30,
-				publ: 30,
-				pu: 40,
-				nfe: 40,
-				lc: 50,
-			};
-			let tier = this.toID(species.tier) || 'ou';
-			if (!(tier in boosts)) return;
-			// Non-Pokemon bans in lower tiers
-			if (target && boosts[tier] > 20) {
-				if (target.set.ability === 'drizzle') tier = 'nubl';
-				if (target.set.ability === 'drought') tier = 'nubl';
-				if (target.set.ability === 'snowwarning') tier = 'nubl';
-			}
-			const pokemon = this.dex.deepClone(species);
-			pokemon.bst = pokemon.baseStats['hp'];
-			const boost = boosts[tier];
-			let statName: StatID;
-			for (statName in pokemon.baseStats as StatsTable) {
-				if (statName === 'hp') continue;
-				pokemon.baseStats[statName] = this.clampIntRange(pokemon.baseStats[statName] + boost, 1, 255);
-				pokemon.bst += pokemon.baseStats[statName];
-			}
-			return pokemon;
-		},
-	},
-	{
-		name: "[Gen 8] Dynamax Frenzy",
-		desc: `All Pok&eacute;mon are always Dynamaxed.`,
-
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon are always Dynamaxed.</div>`);
-		},
-		onSwitchIn(pokemon) {
-			pokemon.canDynamax = true;
-			pokemon.addVolatile('dynamax');
-			pokemon.volatiles['dynamax'].duration = 0;
-			pokemon.canDynamax = false;
-		},
-	},
-	{
-		name: "[Gen 8] Inverse Random Battle",
-		desc: `The type effectiveness chart is inverted: weaknesses become resistances, while resistances and immunities become weaknesses.`,
-		
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Inverse Mod'],
-		randomBanlist: ['Arceus', 'Linoone'],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">The type effectiveness chart is inverted: weaknesses become resistances, while resistances and immunities become weaknesses.</div>`);
-		},
-	},
-	{
-		name: "[Gen 8] Protean Palace",
-		desc: `All Pok&eacute;mon have the Protean effect on top of their regular ability.`,
-		
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		randomBanlist: ['Arceus', 'Greninja', 'Kecleon', 'Shedinja'],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon have the Protean effect on top of their regular ability.</div>`);
-		},
-		onPrepareHitPriority: -1,
-		onPrepareHit(source, target, move) {
-			if (move.hasBounced) return;
-			const type = move.type;
-			if (type && type !== '???' && source.getTypes().join() !== type) {
-				if (!source.setType(type)) return;
-				this.add('-start', source, 'typechange', type);
-			}
-		},
-	},
-	{
-		name: "[Gen 8] Shifting Illusions",
-		desc: `All Pok&eacute;mon have the Illusion effect on top of their regular ability.`,
-		
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		randomBanlist: ['Ditto', 'Zoroark'],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon have the Illusion effect on top of their regular ability.</div>`);
-		},
-		onBeforeSwitchIn(pokemon) {
-			pokemon.illusion = null;
-			// yes, you can Illusion an active pokemon but only if it's to your right
-			for (let i = pokemon.side.pokemon.length - 1; i > pokemon.position; i--) {
-				const possibleTarget = pokemon.side.pokemon[i];
-				if (!possibleTarget.fainted) {
-					pokemon.illusion = possibleTarget;
-					break;
-				}
-			}
-		},
-		onDamagingHit(damage, target, source, move) {
-			if (target.illusion) {
-				this.singleEvent('End', this.dex.abilities.get('Illusion'), target.abilityState, target, source, move);
-			}
-		},
-		onEnd(pokemon) {
-			if (pokemon.illusion) {
-				this.debug('illusion cleared');
-				pokemon.illusion = null;
-				const details = pokemon.species.name + (pokemon.level === 100 ? '' : ', L' + pokemon.level) +
-					(pokemon.gender === '' ? '' : ', ' + pokemon.gender) + (pokemon.set.shiny ? ', shiny' : '');
-				this.add('replace', pokemon, details);
-				this.add('-end', pokemon, 'Illusion');
-			}
-		},
-		onFaint(pokemon) {
-			pokemon.illusion = null;
-		},
-	},
-	{
-		name: "[Gen 8] VoltTurn Mayhem",
-		desc: `All Pok&eacute;mon automatically switch out upon using a move that affects the opponent.`,
-		
-		mod: 'gen8',
-		team: 'random',
-		ruleset: ['Obtainable', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
-		randomBanlist: ['fakeout'],
-		onBegin() {
-			this.add('html', `<div style="margin: 5px 0 0 0 ; padding: 3px ; border: 1px solid #ccc">All Pok&eacute;mon automatically switch out upon using a move that affects the opponent.</div>`);
-		},
-		onModifyMovePriority: -1,
-		onModifyMove(move) {
-			switch (move.target) {
-			case 'normal':
-			case 'randomNormal':
-			case 'allAdjacent':
-			case 'allAdjacentFoes':
-			case 'any':
-			case 'scripted':
-				move.selfSwitch = true;
 			}
 		},
 	},
