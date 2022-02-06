@@ -1669,15 +1669,6 @@ export const commands: Chat.ChatCommands = {
 	},
 	bugshelp: [`/bugs - Links to the various bug reporting services.`],
 
-	avatars(target, room, user) {
-		if (!this.runBroadcast()) return;
-		this.sendReplyBox(`You can <button name="avatars">change your avatar</button> by clicking on it in the <button name="openOptions"><i class="fa fa-cog"></i> Options</button> menu in the upper right. Custom avatars are only obtainable by staff.`);
-	},
-	avatarshelp: [
-		`/avatars - Explains how to change avatars.`,
-		`!avatars - Show everyone that information. Requires: + % @ # &`,
-	],
-
 	optionbutton: 'optionsbutton',
 	optionsbutton(target, room, user) {
 		if (!this.runBroadcast()) return;
@@ -1762,7 +1753,7 @@ export const commands: Chat.ChatCommands = {
 			);
 		}
 		this.sendReplyBox(
-			`Pok&eacute;mon Showdown! damage calculator. (Courtesy of Honko &amp; Austin)<br />` +
+			`Pok&eacute;mon Showdown! damage calculator. (Courtesy of Honko, Austin, &amp; Kris)<br />` +
 			`- <a href="https://calc.pokemonshowdown.com/index.html">Damage Calculator</a>`
 		);
 	},
@@ -2605,7 +2596,7 @@ export const commands: Chat.ChatCommands = {
 			return this.errorReply(`You are using this command too quickly. Wait a bit and try again.`);
 		}
 
-		const [link, comment] = Utils.splitFirst(target, ',');
+		const [link, comment] = Utils.splitFirst(target, ',').map(f => f.trim());
 
 		let buf;
 		if (YouTube.linkRegex.test(link)) {
@@ -2630,7 +2621,12 @@ export const commands: Chat.ChatCommands = {
 				return this.errorReply('Invalid image');
 			}
 		}
-		if (comment) buf += Utils.html`<br />(${comment.trim()})</div>`;
+		if (comment) {
+			if (this.checkChat(comment) !== comment) {
+				return this.errorReply(`You cannot use filtered words in comments.`);
+			}
+			buf += Utils.html`<br />(${comment})</div>`;
+		}
 
 		this.checkBroadcast();
 		if (this.broadcastMessage) {
@@ -2776,7 +2772,7 @@ export const pages: Chat.PageTable = {
 			`<h3>Value rules</h3>`,
 			`<ul><li>Value rules are formatted like [Name] = [value], e.g. "Force Monotype = Water" or "Min Team Size = 4"</li>`,
 			`<li>To remove a value rule, use <code>![rule name]</code>.</li>`,
-			`<li>To override another value rule, use <code>!! [Name] = [new value]</code>. For example, overriding the Min Source Gen on [Gen 8] VGC 2021 Series 10 from 8 to 3 would look like <code>!! Min Source Gen = 3</code>.</li></ul>`,
+			`<li>To override another value rule, use <code>!! [Name] = [new value]</code>. For example, overriding the Min Source Gen on [Gen 8] VGC 2021 from 8 to 3 would look like <code>!! Min Source Gen = 3</code>.</li></ul>`,
 			`<div class="ladder"><table><tr><th>Rule Name</th><th>Description</th></tr>`
 		);
 		for (const rule of rules) {
