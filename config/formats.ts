@@ -39,7 +39,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 		mod: 'gen8',
 		gameType: 'doubles',
-		ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview', '!Sleep Clause Mod', 'Adjust Level = 50', 'Picked Team Size = 4'],
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', 'Team Preview', '!Sleep Clause Mod', '!OHKO Clause', '!Evasion Moves Clause', 'Adjust Level = 50', 'Picked Team Size = 4'],
 	},
 	{
 		name: "[Gen 8] LC Galar Dex Draft",
@@ -105,7 +105,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 		mod: 'gen8',
 		gameType: 'doubles',
-		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', '!Sleep Clause Mod', 'Adjust Level = 50', 'Picked Team Size = 4'],
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', '!Sleep Clause Mod', '!OHKO Clause', '!Evasion Moves Clause', 'Adjust Level = 50', 'Picked Team Size = 4'],
 	},
 	{
 		name: "[Gen 8] LC National Dex Draft",
@@ -171,7 +171,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 		mod: 'gen8leaks',
 		gameType: 'doubles',
-		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', '!Sleep Clause Mod', 'Adjust Level = 50', 'Picked Team Size = 4'],
+		ruleset: ['Obtainable', 'Draft', '+Unreleased', '+Past', 'Team Preview', '!Sleep Clause Mod', '!OHKO Clause', '!Evasion Moves Clause', 'Adjust Level = 50', 'Picked Team Size = 4'],
 	},
 	{
 		name: "[Gen 8] LC National Dex Leaks Draft",
@@ -225,7 +225,7 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 
 		mod: 'gen8bdsp',
 		gameType: 'doubles',
-		ruleset: ['Obtainable', 'Draft', '+Unobtainable', '+Unreleased', 'Team Preview', '!Sleep Clause Mod', 'Adjust Level = 50', 'Picked Team Size = 4'],
+		ruleset: ['Obtainable', 'Draft', '+Unobtainable', '+Unreleased', 'Team Preview', '!Sleep Clause Mod', '!OHKO Clause', '!Evasion Moves Clause', 'Adjust Level = 50', 'Picked Team Size = 4'],
 	},
 	{
 		name: "[Gen 8 BDSP] LC BDSP Draft",
@@ -283,14 +283,19 @@ export const Formats: (FormatsData | {section: string, column?: number})[] = [
 		],
 	},
 	{
-		name: "[Gen 4] Trick House Elimlocke",
+		name: "[Gen 4] Trick House Renegade Platinum",
 
-		mod: 'sgss',
-		ruleset: ['Standard', '!Species Clause', '!Obtainable Moves', '!Obtainable Abilities'],
+		mod: 'renpt',
+		ruleset: ['Standard', '+PastMove', '+Future', '!Species Clause', '!Obtainable Moves', '!Obtainable Abilities', 'Team Preview'],
 		newTypes: [
-			'Venomoth', 'Farfetch\u2019d', 'Masquerain', 'Volbeat', 'Illumise', 'Glalie', 'Luxio', 'Luxray', 'Carnivine', 'Electivire', 'Rotom-Heat', 
-			'Rotom-Wash', 'Rotom-Frost', 'Rotom-Fan', 'Rotom-Mow', 'Clefairy', 'Clefable', 'Jigglypuff', 'Wigglytuff', 'Mr. Mime', 'Cleffa', 'Igglybuff', 
-			'Togepi', 'Togetic', 'Marill', 'Azumarill', 'Snubbull', 'Granbull', 'Ralts', 'Kirlia', 'Gardevoir', 'Azurill', 'Mawile', 'Mime Jr.', 'Togekiss'
+			// New types
+			'Charizard', 'Ninetales', 'Golduck', 'Farfetch\u2019d', 'Meganium', 'Feraligatr', 'Noctowl', 'Ampharos', 'Misdreavus', 
+			'Sceptile', 'Masquerain', 'Volbeat', 'Illumise', 'Trapinch', 'Vibrava', 'Flygon', 'Swablu', 'Altaria', 'Seviper', 
+			'Milotic', 'Glalie', 'Luvdisc', 'Luxray', 'Lopunny', 'Mismagius', 'Electivire', 'Rotom-Heat', 'Rotom-Wash', 'Rotom-Frost', 
+			'Rotom-Fan', 'Rotom-Mow', 'Uxie', 'Mesprit', 'Azelf',
+			// Fairy
+			'Clefairy', 'Clefable', 'Jigglypuff', 'Wigglytuff', 'Mr. Mime', 'Cleffa', 'Igglybuff', 'Togepi', 'Togetic', 'Marill', 
+			'Azumarill', 'Snubbull', 'Granbull', 'Ralts', 'Kirlia', 'Gardevoir', 'Azurill', 'Mawile', 'Mime Jr.', 'Togekiss'
 		],
 		onSwitchIn(pokemon) {
 			if (this.format.newTypes.includes(pokemon.species.name)) {
