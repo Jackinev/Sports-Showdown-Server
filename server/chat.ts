@@ -28,6 +28,7 @@ import type {Punishment} from './punishments';
 import type {PartialModlogEntry} from './modlog';
 import {FriendsDatabase, PM} from './friends';
 import {SQL, Repl, FS, Utils} from '../lib';
+import * as Artemis from './artemis';
 import {Dex} from '../sim';
 import {resolve} from 'path';
 import * as JSX from './chat-jsx';
@@ -1563,7 +1564,7 @@ export const Chat = new class {
 	commands!: AnnotatedChatCommands;
 	basePages!: PageTable;
 	pages!: PageTable;
-	readonly destroyHandlers: (() => void)[] = [];
+	readonly destroyHandlers: (() => void)[] = [Artemis.destroy];
 	readonly crqHandlers: {[k: string]: CRQHandler} = {};
 	readonly handlers: {[k: string]: ((...args: any) => any)[]} = Object.create(null);
 	/** The key is the name of the plugin. */
@@ -2526,6 +2527,20 @@ export const Chat = new class {
 	 */
 	getImageDimensions(url: string): Promise<{height: number, width: number}> {
 		return probe(url);
+	}
+
+	parseArguments(str: string, delim = ',', paramDelim = '=', useIDs = true) {
+		const result: Record<string, string[]> = {};
+		for (const part of str.split(delim)) {
+			let [key, val] = Utils.splitFirst(part, paramDelim).map(f => f.trim());
+			if (useIDs) key = toID(key);
+			if (!toID(key) || !toID(val)) {
+				throw new Chat.ErrorMessage(`Invalid option ${part}. Must be in [key]${paramDelim}[value] format.`);
+			}
+			if (!result[key]) result[key] = [];
+			result[key].push(val);
+		}
+		return result;
 	}
 
 	/**

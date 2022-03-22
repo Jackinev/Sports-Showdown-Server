@@ -1010,7 +1010,7 @@ export class FSLogSearcher extends Searcher {
 		buf += this.renderDayResults(results, roomid);
 		if (total > limit) {
 			// cap is met
-			buf += `<br /><strong>Max results reached, capped at ${total > limit ? limit : MAX_RESULTS}</strong>`;
+			buf += `<br /><strong>Max results reached, capped at ${limit}</strong>`;
 			buf += `<br /><div style="text-align:center">`;
 			if (total < MAX_RESULTS) {
 				buf += `<button class="button" name="send" value="/sl ${search}|${roomid}|${year}|${limit + 100}">View 100 more<br />&#x25bc;</button>`;
@@ -1703,9 +1703,7 @@ export const commands: Chat.ChatCommands = {
 		if (i > 20) buf = `<details class="readmore">${buf}</details>`;
 		if (!atLeastOne) buf = `<br />None found.`;
 
-		if (this.pmTarget?.isStaff || room?.roomid === 'staff') {
-			this.runBroadcast();
-		}
+		this.runBroadcast();
 
 		return this.sendReplyBox(
 			Utils.html`<strong>Chat messages in the battle '${roomid}'` +

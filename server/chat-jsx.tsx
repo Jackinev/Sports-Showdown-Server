@@ -3,7 +3,7 @@
  * By Mia and Zarel
  */
 import preact from 'preact';
-import {h, Fragment} from "preact";
+import {h, Fragment, Component} from "preact";
 import render from 'preact-render-to-string';
 import {Utils} from '../lib';
 
@@ -38,6 +38,7 @@ export type VNode = preact.VNode;
 
 export const h = h;
 export const Fragment = Fragment;
+export const Component = Component;
 
 export class FormatText extends preact.Component<{isTrusted?: boolean, replaceLinebreaks?: boolean}> {
 	render() {
